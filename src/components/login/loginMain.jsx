@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { loginUser } from "../actions/loginActions";
+
 class LoginMain extends Component {
   state = {};
   render() {
@@ -11,4 +16,4 @@ class LoginMain extends Component {
   }
 }
 
-export default LoginMain;
+export default connect(null, { loginUser })(LoginMain);
