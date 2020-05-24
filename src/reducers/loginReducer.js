@@ -3,6 +3,8 @@ import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL } from "../actions/types";
 const initialState = {
   userName: "",
   token: "",
+  loading: false,
+  error: "",
 };
 
 export default function (state = initialState, action) {
@@ -10,17 +12,18 @@ export default function (state = initialState, action) {
     case LOGIN_REQUEST:
       return {
         ...state,
-        items: action.payload,
+        loading: true,
       };
     case LOGIN_SUCESS:
       return {
         ...state,
-        item: action.payload,
+        loading: false,
       };
     case LOGIN_FAIL:
       return {
         ...state,
-        item: action.payload,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

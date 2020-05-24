@@ -6,11 +6,14 @@ import ChatMain from "./components/chat/chatMain";
 import LoginMain from "./components/login/loginMain";
 import SignupMain from "./components/signup/signupMain";
 
+import store from "./store";
+
 class App extends Component {
   state = {};
+
   render() {
     return (
-      <Provider>
+      <Provider store={store}>
         <div>Hi all</div>
         <Router>
           <Route path="/chat" component={ChatMain} />
