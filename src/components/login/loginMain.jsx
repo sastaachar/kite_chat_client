@@ -7,7 +7,7 @@ import { loginUser } from "../../actions/loginActions";
 
 class LoginMain extends Component {
   state = {};
-  componentDidMount = () => {
+  handleLogin = () => {
     let userData = {
       userName: "bfffsefva",
       password: "a",
@@ -18,6 +18,7 @@ class LoginMain extends Component {
     return (
       <div className="loginMain">
         {this.props.loading ? <span>loading</span> : null}
+        <button onClick={this.handleLogin}>LOGIN</button>
         <span>Login here</span>
       </div>
     );

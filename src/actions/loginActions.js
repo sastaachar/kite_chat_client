@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL } from "./types";
+import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL, LOGOUT } from "./types";
 
 const SERVER_URL = "http://localhost:5000";
 
@@ -37,4 +37,10 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err,
       })
     );
+};
+
+export const logoutUser = (userData) => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };
