@@ -4,28 +4,19 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-class UnauthenticatedRoute extends Component {
+class PreCheckRoute extends Component {
   render() {
     const { children, loggedIn, preCheckComplete, ...rest } = this.props;
+    console.log(preCheckComplete);
     return (
       <Route {...rest}>
-        {preCheckComplete ? (
-          !loggedIn ? (
-            children
-          ) : (
-            <Redirect to="/chat" />
-          )
-        ) : (
-          <Redirect to="/loading" />
-        )}
+        {!preCheckComplete ? children : <Redirect to="/" />}
       </Route>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.loginData.loggedIn,
   preCheckComplete: state.preCheck.complete,
 });
-
-export default connect(mapStateToProps)(UnauthenticatedRoute);
+export default connect(mapStateToProps)(PreCheckRoute);

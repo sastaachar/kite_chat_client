@@ -15,6 +15,8 @@ import SignupMain from "./components/signup/signupMain";
 import NotFoundPage from "./components/notFoundPage/notFound";
 import UnauthenticatedRoute from "./components/unauthenticatedRoute";
 import AuthenticatedRoute from "./components/authenticatedRoute";
+import LoadingPage from "./components/loadingPage";
+import PreCheckRoute from "./components/preCheckRoute";
 
 import store from "./store";
 
@@ -38,6 +40,11 @@ class App extends Component {
             <AuthenticatedRoute path="/chat">
               <ChatMain />
             </AuthenticatedRoute>
+
+            <PreCheckRoute>
+              <LoadingPage />
+            </PreCheckRoute>
+
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
