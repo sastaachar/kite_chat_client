@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { preCheckSucess, preCheckFail } from "../actions/precheckActions";
+import {
+  preCheck,
+  preCheckSucess,
+  preCheckFail,
+} from "../actions/precheckActions";
 
 class ChatMain extends Component {
   state = {};
@@ -14,10 +18,13 @@ class ChatMain extends Component {
     this.props.preCheckFail();
   };
 
+  componentDidMount = () => {
+    this.props.preCheck();
+  };
   render() {
     return (
       <div className="chatMain">
-        <span>Loadin....</span>
+        <span>Loading....</span>
         <button onClick={this.handleSucess}>Sucess</button>
         <button onClick={this.handleFail}>Fail</button>
       </div>
@@ -25,4 +32,6 @@ class ChatMain extends Component {
   }
 }
 
-export default connect(null, { preCheckSucess, preCheckFail })(ChatMain);
+export default connect(null, { preCheckSucess, preCheckFail, preCheck })(
+  ChatMain
+);

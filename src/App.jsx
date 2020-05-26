@@ -28,6 +28,10 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
+            {
+              //if user tries to go to these paths after being
+              //but technically not possible cause the page will reload
+            }
             <UnauthenticatedRoute exact path="/">
               <MainPage />
             </UnauthenticatedRoute>
@@ -37,14 +41,24 @@ class App extends Component {
             <UnauthenticatedRoute path="/signup">
               <SignupMain />
             </UnauthenticatedRoute>
+            {
+              //only show if logged in
+            }
             <AuthenticatedRoute path="/chat">
               <ChatMain />
             </AuthenticatedRoute>
 
+            {
+              //always hit the the loading page on reload or new load
+              //chaging link in the browser is reload dumbass
+            }
             <PreCheckRoute>
               <LoadingPage />
             </PreCheckRoute>
 
+            {
+              //if oversmart user tries anything
+            }
             <Route path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>

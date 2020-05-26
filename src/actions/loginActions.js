@@ -12,6 +12,7 @@ export const loginUser = (userData) => (dispatch) => {
     type: LOGIN_REQUEST,
     payload: {},
   });
+
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -23,7 +24,7 @@ export const loginUser = (userData) => (dispatch) => {
       if (!res.ok) {
         throw Error(res.statusText);
       }
-      res.json();
+      return res.json();
     })
     .then((authDetails) =>
       dispatch({
