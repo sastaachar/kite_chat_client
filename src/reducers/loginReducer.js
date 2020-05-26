@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         loggedIn: true,
         loading: false,
-        userDetails: action.payload.userDetails,
+        userDetails: action.payload,
       };
     case LOGIN_FAIL:
       return {

@@ -26,12 +26,16 @@ export const loginUser = (userData) => (dispatch) => {
       }
       return res.json();
     })
-    .then((authDetails) =>
+    .then((authDetails) => {
+      //store the jwt token
+
+      localStorage.setItem("jwtToken", authDetails.jwtToken);
+
       dispatch({
         type: LOGIN_SUCESS,
-        payload: authDetails,
-      })
-    )
+        payload: authDetails.userDetails,
+      });
+    })
     .catch((err) =>
       dispatch({
         type: LOGIN_FAIL,
