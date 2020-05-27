@@ -16,6 +16,8 @@ export const preCheck = () => (dispatch) => {
   //            else sucess LOGIN_SUCESS
   //        else if not found
   //            PRECHECK_OVER
+
+  let jwtToken = localStorage.getItem("jwtToken");
 };
 
 //jsut for develpoment
