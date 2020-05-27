@@ -13,11 +13,17 @@ export const loginUser = (userData) => (dispatch) => {
     payload: {},
   });
 
+  let headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  headers.append("Accept", "application/json");
+  headers.append("Authorization", "Bearer " + localStorage.getItem("jwtToken"));
+  headers.append("Origin", "http://localhost:3000");
+  headers.append("Access-Control-Allow-Credentials", "true");
+
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
+    headers,
+    credentials: "include",
     body: JSON.stringify(userData),
   })
     .then((res) => {
@@ -28,7 +34,6 @@ export const loginUser = (userData) => (dispatch) => {
     })
     .then((authDetails) => {
       //store the jwt token
-
       localStorage.setItem("jwtToken", authDetails.jwtToken);
 
       dispatch({

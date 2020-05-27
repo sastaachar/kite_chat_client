@@ -21,7 +21,6 @@ export default function (state = initialState, action) {
         loading: true,
       };
     case LOGIN_SUCESS:
-      console.log("called from login");
       return {
         ...state,
         loggedIn: true,

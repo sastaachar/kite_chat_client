@@ -17,7 +17,6 @@ export default function (state = {}, action) {
         complete: true,
       };
     case LOGIN_SUCESS:
-      console.log("called from precheck");
       return {
         ...state,
         complete: true,

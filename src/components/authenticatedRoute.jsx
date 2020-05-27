@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 class AuthenticatedRoute extends Component {
   render() {
     const { children, loggedIn, preCheckComplete, ...rest } = this.props;
-    console.log(preCheckComplete);
     return (
       <Route {...rest}>
         {preCheckComplete ? (
