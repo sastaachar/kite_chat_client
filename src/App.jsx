@@ -13,10 +13,10 @@ import ChatMain from "./components/chat/chatMain";
 import LoginMain from "./components/login/loginMain";
 import SignupMain from "./components/signup/signupMain";
 import NotFoundPage from "./components/notFoundPage/notFound";
-import UnauthenticatedRoute from "./components/unauthenticatedRoute";
-import AuthenticatedRoute from "./components/authenticatedRoute";
-import LoadingPage from "./components/loadingPage";
-import PreCheckRoute from "./components/preCheckRoute";
+import UnauthenticatedRoute from "./components/misc/unauthenticatedRoute";
+import AuthenticatedRoute from "./components/misc/authenticatedRoute";
+import LoadingPage from "./components/misc/loadingPage";
+import PreCheckRoute from "./components/misc/preCheckRoute";
 
 import store from "./store";
 

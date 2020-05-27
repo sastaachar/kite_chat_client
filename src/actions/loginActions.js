@@ -1,6 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL, LOGOUT } from "./types";
-
-const SERVER_URL = "http://localhost:5000";
+import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL, SERVER_URL } from "./types";
 
 // login
 export const loginUser = (userData) => (dispatch) => {
@@ -13,17 +11,11 @@ export const loginUser = (userData) => (dispatch) => {
     payload: {},
   });
 
-  //set headers
-  let headers = new Headers();
-  headers.append("Content-Type", "application/json");
-  headers.append("Accept", "application/json");
-  headers.append("Authorization", "Bearer " + localStorage.getItem("jwtToken"));
-  headers.append("Origin", "http://localhost:3000");
-  headers.append("Access-Control-Allow-Credentials", "true");
-
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
-    headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
     credentials: "include",
     body: JSON.stringify(userData),
   })
@@ -48,10 +40,4 @@ export const loginUser = (userData) => (dispatch) => {
         payload: err,
       })
     );
-};
-
-export const logoutUser = (userData) => (dispatch) => {
-  dispatch({
-    type: LOGOUT,
-  });
 };
