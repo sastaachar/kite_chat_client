@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { loginUser } from "../../actions/loginActions";
+
+import "./loginPage.css";
 
 class LoginMain extends Component {
   state = {
@@ -11,7 +12,7 @@ class LoginMain extends Component {
     formUserName: "",
     formPassword: "",
   };
-  handleLogin = () => {
+  handleLogin = (e) => {
     let userData = {
       password: this.state.formPassword,
     };
@@ -26,32 +27,51 @@ class LoginMain extends Component {
   render() {
     return (
       <div className="loginMain">
-        {this.props.loading ? <span>loading</span> : null}
-        <form>
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            name="formEmail"
-            onChange={this.handleFormChange}
-          />
-          <label htmlFor="userName">User Name</label>
-          <input
-            type="text"
-            id="userName"
-            name="formUserName"
-            onChange={this.handleFormChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            name="formPassword"
-            onChange={this.handleFormChange}
-          />
-        </form>
-        <button onClick={this.handleLogin}>LOGIN</button>
-        <span>Login here</span>
+        <div className="leftBox">
+          {this.props.loading ? <span>loading</span> : null}
+          <div className="logoPic">
+            <img src={`${process.env.PUBLIC_URL}/kiteChatLogo.png`} alt="" />
+          </div>
+          <div className="girlPic">
+            <img src={`${process.env.PUBLIC_URL}/girlChat.png`} alt="" />
+          </div>
+        </div>
+        <div className="rightBox">
+          <div className="loginBox">
+            <form>
+              <div className="inputFld">
+                <label htmlFor="userName">Username</label>
+                <br />
+                <input
+                  type="text"
+                  id="userName"
+                  name="formUserName"
+                  onChange={this.handleFormChange}
+                />
+              </div>
+              <div className="inputFld">
+                <label htmlFor="password">Password</label>
+                <br />
+                <input
+                  type="text"
+                  id="password"
+                  name="formPassword"
+                  onChange={this.handleFormChange}
+                />
+              </div>
+            </form>
+            <button className="loginBtn" onClick={this.handleLogin}>
+              <span>LOGIN</span>
+            </button>
+            <div className="forgotUrl">
+              <a href="/">Forgot password?</a>
+            </div>
+            <div className="signupUrl">
+              <span>Don't have an account?</span>
+              <a href="/">Signup</a>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
