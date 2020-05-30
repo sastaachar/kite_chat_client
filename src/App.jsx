@@ -33,7 +33,7 @@ class App extends Component {
               //but technically not possible cause the page will reload
             }
             <UnauthenticatedRoute exact path="/">
-              <MainPage />
+              <LoginMain />
             </UnauthenticatedRoute>
             <UnauthenticatedRoute path="/login">
               <LoginMain />

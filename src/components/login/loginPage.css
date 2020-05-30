@@ -28,22 +28,41 @@ span {
 
 .girlPic {
   position: absolute;
+  width: 96.8vh;
+  height: 53.6vh;
   bottom: 0;
 }
 
 .logoPic {
   position: absolute;
-  left: 20%;
-  top: 2%;
+  width: 57.3vh;
+  height: 36.5vh;
 }
-
+.logoName {
+  position: absolute;
+  top: 2%;
+  left: 3.6%;
+  font-size: 8.86vh;
+}
+.logoTag {
+  position: absolute;
+  top: 11.7%;
+  left: 7.1%;
+  font-size: 2.77vh;
+}
 /* right box - end  */
+.guyChat {
+  position: absolute;
+  top: 49px;
+  right: 440px;
+  z-index: 1;
+}
 
 .loginBox {
   position: relative;
-  width: 50%;
+  width: 45%;
   height: 68.33%;
-  top: 10%;
+  top: 20%;
   left: 25%;
   background: linear-gradient(180deg, #575a89 0%, rgba(87, 90, 137, 0) 100%);
   border-top-right-radius: 40px;
@@ -69,21 +88,21 @@ span {
 
 .inputFld input:focus {
   outline: none;
-  border: 3px solid black;
+  border: 2px solid #ffb658;
 }
 
 .inputFld input[type="text"] {
   font-family: Montserrat;
-  font-size: 24px;
+  font-size: 3.32vh;
 }
 
 .inputFld label {
   position: relative;
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 41px;
   right: 24%;
-  font-size: 1.5rem;
-  line-height: 39px;
+  font-size: 3.32vh;
+  line-height: 5.4vh;
 }
 
 .loginBtn {

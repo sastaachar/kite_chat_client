@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { loginUser } from "../../actions/loginActions";
+import TheGirl from "../misc/TheGirl";
+import TheGuy from "../misc/TheGuy";
+import Kite from "../misc/Kite";
 
 import "./loginPage.css";
 
@@ -30,13 +33,19 @@ class LoginMain extends Component {
         <div className="leftBox">
           {this.props.loading ? <span>loading</span> : null}
           <div className="logoPic">
-            <img src={`${process.env.PUBLIC_URL}/kiteChatLogo.png`} alt="" />
+            <Kite></Kite>
           </div>
+          <span className="logoName">kite Chat</span>
+          <span className="logoTag">stay connected</span>
+
           <div className="girlPic">
-            <img src={`${process.env.PUBLIC_URL}/girlChat.png`} alt="" />
+            <TheGirl></TheGirl>
           </div>
         </div>
         <div className="rightBox">
+          <div className="guyChat">
+            <TheGuy></TheGuy>
+          </div>
           <div className="loginBox">
             <form>
               <div className="inputFld">
