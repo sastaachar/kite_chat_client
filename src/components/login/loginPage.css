@@ -53,8 +53,10 @@ span {
 /* right box - end  */
 .guyChat {
   position: absolute;
-  top: 49px;
-  right: 440px;
+  width: 21vh;
+  height: 22.7vh;
+  top: 6.78vh;
+  right: 29%;
   z-index: 1;
 }
 
@@ -74,7 +76,7 @@ span {
 
 .inputFld input,
 .loginBtn {
-  height: 45px;
+  height: 6.23vh;
   right: 28.3%;
   border: 1px solid var(--light);
   border-radius: 35px;

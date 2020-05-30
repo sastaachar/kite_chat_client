@@ -2,7 +2,13 @@ import * as React from "react";
 
 function SvgComponent(props) {
   return (
-    <svg width={152} height={164} viewBox="0 0 152 164" fill="none" {...props}>
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 152 164"
+      fill="none"
+      {...props}
+    >
       <g id="prefix__guyChat">
         <path
           id="prefix__Vector"
@@ -354,4 +360,3 @@ function SvgComponent(props) {
 }
 
 export default SvgComponent;
-
