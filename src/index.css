@@ -1,14 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Scope+One");
 body {
-  margin: 0;
-  box-sizing: border-box;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Scope One", "Roboto",
-    "Montserrat", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
+    margin: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Scope One", "Roboto", "Montserrat", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
