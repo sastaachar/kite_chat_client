@@ -23,7 +23,6 @@ span {
   width: 50%;
   height: 100%;
 }
-
 /* right box  */
 
 .girlPic {
@@ -38,12 +37,14 @@ span {
   width: 57.3vh;
   height: 36.5vh;
 }
+
 .logoName {
   position: absolute;
   top: 2%;
   left: 3.6%;
   font-size: 8.86vh;
 }
+
 .logoTag {
   position: absolute;
   top: 11.7%;
@@ -51,6 +52,7 @@ span {
   font-size: 2.77vh;
 }
 /* right box - end  */
+
 .guyChat {
   position: absolute;
   width: 21vh;
@@ -71,7 +73,6 @@ span {
   border-top-left-radius: 40px;
   text-align: center;
 }
-
 /* input fileds */
 
 .inputFld input,
@@ -84,13 +85,13 @@ span {
 
 .inputFld input {
   width: 70%;
-  padding: 0 20px;
+  padding: 0 2.77vh;
+  border: 2px solid #575a8900;
   background: #ffffff;
 }
 
 .inputFld input:focus {
   outline: none;
-  border: 2px solid #ffb658;
 }
 
 .inputFld input[type="text"] {
@@ -101,22 +102,22 @@ span {
 .inputFld label {
   position: relative;
   display: inline-block;
-  margin-top: 41px;
-  right: 24%;
+  margin-top: 5.67vh;
+  right: 23%;
   font-size: 3.32vh;
   line-height: 5.4vh;
 }
 
 .loginBtn {
-  margin-top: 60px;
-  height: 40px;
-  width: 39%;
+  padding: 5px 5px 10px 10px;
+  margin-top: 8.31vh;
+  width: 155.72px;
   background: var(--dark);
 }
 
 .loginBtn span {
-  font-size: 30px;
-  line-height: 41px;
+  font-size: 4.1vh;
+  line-height: 5.67vh;
   text-align: center;
   letter-spacing: 0.1em;
   color: #fff;
@@ -124,15 +125,35 @@ span {
 
 .loginBox .forgotUrl a {
   display: inline-block;
-  margin-top: 15px;
+  font-size: 2.21vh;
+  margin-top: 2.07vh;
   color: var(--light);
 }
 
 .loginBox .signupUrl {
-  margin-top: 20px;
+  position: absolute;
+  bottom: 12%;
+  left: 21%;
+  margin-top: 2.77vh;
+  font-size: 2.21vh;
 }
 
 .loginBox .signupUrl a {
   margin-left: 5px;
+  font-size: 2.21vh;
   color: var(--light);
+}
+
+@keyframes color-rotate {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+.logoPic:hover {
+  animation: color-rotate 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }

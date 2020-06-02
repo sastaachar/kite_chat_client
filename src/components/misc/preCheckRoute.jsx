@@ -9,7 +9,7 @@ class PreCheckRoute extends Component {
     const { children, loggedIn, preCheckComplete, ...rest } = this.props;
     return (
       <Route {...rest}>
-        {!preCheckComplete ? children : <Redirect to="/" />}
+        {!preCheckComplete ? children : <Redirect to="/signup" />}
       </Route>
     );
   }

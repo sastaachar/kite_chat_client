@@ -16,7 +16,7 @@ class UnauthenticatedRoute extends Component {
             <Redirect to="/chat" />
           )
         ) : (
-          <Redirect to="/loading" />
+          <Redirect to="/" />
         )}
       </Route>
     );

@@ -8,7 +8,9 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import MainPage from "./components/main/mainPage";
+import "./App.css";
+
+//import MainPage from "./components/main/mainPage";
 import ChatMain from "./components/chat/chatMain";
 import LoginMain from "./components/login/loginMain";
 import SignupMain from "./components/signup/signupMain";
@@ -29,12 +31,19 @@ class App extends Component {
         <Router>
           <Switch>
             {
+              //always hit the the loading page on reload or new load
+              //chaging link in the browser is reload dumbass
+            }
+            <PreCheckRoute exact path="/">
+              <LoadingPage />
+            </PreCheckRoute>
+            {
               //if user tries to go to these paths after being
               //but technically not possible cause the page will reload
+              //the main page is suppposed to be in / route but the page sucks for now
+              //so we are going with login
             }
-            <UnauthenticatedRoute exact path="/">
-              <MainPage />
-            </UnauthenticatedRoute>
+
             <UnauthenticatedRoute path="/login">
               <LoginMain />
             </UnauthenticatedRoute>
@@ -47,19 +56,10 @@ class App extends Component {
             <AuthenticatedRoute path="/chat">
               <ChatMain />
             </AuthenticatedRoute>
-
-            {
-              //always hit the the loading page on reload or new load
-              //chaging link in the browser is reload dumbass
-            }
-            <PreCheckRoute>
-              <LoadingPage />
-            </PreCheckRoute>
-
             {
               //if oversmart user tries anything
             }
-            <Route path="/404" component={NotFoundPage} />
+            <Route exact path="/404" component={NotFoundPage} />
             <Redirect to="/404" />
           </Switch>
         </Router>

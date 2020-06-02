@@ -13,10 +13,10 @@ class AuthenticatedRoute extends Component {
           loggedIn ? (
             children
           ) : (
-            <Redirect to="/" />
+            <Redirect to="/login" />
           )
         ) : (
-          <Redirect to="/loading" />
+          <Redirect to="/" />
         )}
       </Route>
     );

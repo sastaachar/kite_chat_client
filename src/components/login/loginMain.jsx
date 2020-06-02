@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { loginUser } from "../../actions/loginActions";
@@ -73,11 +74,11 @@ class LoginMain extends Component {
               <span>LOGIN</span>
             </button>
             <div className="forgotUrl">
-              <a href="/">Forgot password?</a>
+              <Link to="/password/reset">Forgot password?</Link>
             </div>
             <div className="signupUrl">
               <span>Don't have an account?</span>
-              <a href="/">Signup</a>
+              <Link to="/signup">Signup</Link>
             </div>
           </div>
         </div>

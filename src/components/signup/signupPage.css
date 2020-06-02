@@ -1,0 +1,30 @@
+/* biggest hack ever */
+
+.emailSpl {
+  left: -6.51vw;
+}
+
+.splUserName input {
+  position: absolute;
+  border: 1px solid black;
+  top: 49vh;
+  right: 50vw;
+  width: 25vw;
+}
+.splUserName label {
+  position: absolute;
+  width: 25vw;
+  top: 50vh;
+  right: 45vw;
+  /* i dont know y :( */
+}
+
+.girlSit {
+  position: absolute;
+  height: 145px;
+  width: 145px;
+  top: 30.4vh;
+  right: 68vw;
+}
+
+/*  */
