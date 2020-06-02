@@ -111,13 +111,13 @@ span {
 .loginBtn {
   padding: 5px 5px 10px 10px;
   margin-top: 8.31vh;
-  width: 155.72px;
+  width: auto;
   background: var(--dark);
 }
 
 .loginBtn span {
-  font-size: 4.1vh;
-  line-height: 5.67vh;
+  font-size: 1.9vw;
+  line-height: 2.66vw;
   text-align: center;
   letter-spacing: 0.1em;
   color: #fff;
@@ -125,7 +125,7 @@ span {
 
 .loginBox .forgotUrl a {
   display: inline-block;
-  font-size: 2.21vh;
+  font-size: 2.5vh;
   margin-top: 2.07vh;
   color: var(--light);
 }
@@ -133,9 +133,9 @@ span {
 .loginBox .signupUrl {
   position: absolute;
   bottom: 12%;
-  left: 21%;
+  left: 19%;
   margin-top: 2.77vh;
-  font-size: 2.21vh;
+  font-size: 2.5vh;
 }
 
 .loginBox .signupUrl a {
@@ -145,15 +145,16 @@ span {
 }
 
 @keyframes color-rotate {
-  from {
+  to {
     filter: hue-rotate(0deg);
   }
-  to {
+
+  from {
     filter: hue-rotate(360deg);
   }
 }
 .logoPic:hover {
-  animation: color-rotate 1s;
+  animation: color-rotate 0.5s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
