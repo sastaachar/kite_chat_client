@@ -8,4 +8,4 @@ export const PRECHECK_FAIL = "PRECHECK_FAIL";
 export const LOGOUT_FAIL = "LOGOUT_FAIL";
 
 //pls forgive me
-export const SERVER_URL = "http://localhost:5000";
+export const SERVER_URL = "https://kite-chat-sever.herokuapp.com";

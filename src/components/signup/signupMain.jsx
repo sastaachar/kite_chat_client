@@ -10,6 +10,8 @@ import GirlSit from "../misc/girlSit";
 import "../login/loginPage.css";
 import "./signupPage.css";
 
+import { SERVER_URL } from "../../actions/types";
+
 class SignupMain extends Component {
   state = {
     formEmail: "",
@@ -21,7 +23,6 @@ class SignupMain extends Component {
     e.preventDefault();
     const { formEmail, formUserName, formPassword } = this.state;
 
-    const SERVER_URL = "http://localhost:5000/users/signup";
     try {
       let res = await fetch(SERVER_URL, {
         method: "POST",
