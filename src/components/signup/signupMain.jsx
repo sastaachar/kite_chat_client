@@ -24,7 +24,7 @@ class SignupMain extends Component {
     const { formEmail, formUserName, formPassword } = this.state;
 
     try {
-      let res = await fetch(SERVER_URL, {
+      let res = await fetch(`${SERVER_URL}/signup`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
