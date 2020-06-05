@@ -1,17 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import "./chatPage.css";
+
 import { logoutUser } from "../../actions/logoutActions";
 class ChatMain extends Component {
-  state = {};
+  state = {
+    sendTo: "",
+  };
   render() {
     const { userName } = this.props.userDetails;
     return (
-      <div className="chatMain">
-        <span>chat here</span>
-        {userName}
-        <button onClick={this.props.logoutUser}>LOGOUT</button>
-      </div>
+      <div
+        className="chatMain"
+        style={{
+          background: `url(${process.env.PUBLIC_URL}/chatPagedemo.png)`,
+        }}
+      ></div>
     );
   }
 }
