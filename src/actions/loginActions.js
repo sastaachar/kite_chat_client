@@ -11,6 +11,7 @@ export const loginUser = (userData) => (dispatch) => {
     payload: {},
   });
 
+  let responseOK;
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
     headers: {
@@ -20,15 +21,19 @@ export const loginUser = (userData) => (dispatch) => {
     body: JSON.stringify(userData),
   })
     .then((res) => {
-      if (!res.ok) {
-        throw Error(res.statusText);
-      }
+      //to check if response is ok
+      responseOK = res.ok;
       return res.json();
     })
+    .then((jsonRes) => {
+      //check if response is ok
+      if (!responseOK) {
+        //server will send error in res.message
+        throw Error(jsonRes.message);
+      }
+      return jsonRes;
+    })
     .then((authDetails) => {
-      //store the jwt token
-      localStorage.setItem("jwtToken", authDetails.jwtToken);
-
       dispatch({
         type: LOGIN_SUCESS,
         payload: authDetails.userDetails,
@@ -37,7 +42,7 @@ export const loginUser = (userData) => (dispatch) => {
     .catch((err) =>
       dispatch({
         type: LOGIN_FAIL,
-        payload: err,
+        payload: err.message,
       })
     );
 };

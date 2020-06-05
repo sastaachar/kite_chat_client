@@ -11,18 +11,25 @@ export const preCheck = () => (dispatch) => {
     type: PRECHECK_REQUEST,
   });
 
+  let responseOK;
   fetch(`${SERVER_URL}/users`, {
     credentials: "include",
   })
     .then((res) => {
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
+      //to check if response is ok
+      responseOK = res.ok;
       return res.json();
+    })
+    .then((jsonRes) => {
+      //check if response is ok
+      if (!responseOK) {
+        //server will send error in res.message
+        throw Error(jsonRes.message);
+      }
+      return jsonRes;
     })
     .then((res) => {
       //user alrady logged in
-
       dispatch({
         type: LOGIN_SUCESS,
         payload: res.userDetails,
@@ -32,7 +39,7 @@ export const preCheck = () => (dispatch) => {
       //the preCheck failed
       dispatch({
         type: PRECHECK_FAIL,
-        payload: err,
+        payload: err.message,
       });
     });
 };

@@ -15,6 +15,7 @@ export default function (state = {}, action) {
       return {
         ...state,
         complete: true,
+        error: action.payload,
       };
     case LOGIN_SUCESS:
       return {

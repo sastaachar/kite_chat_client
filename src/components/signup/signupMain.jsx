@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { loginUser } from "../../actions/loginActions";
+import { signupUser } from "../../actions/signupActions";
 import Kite from "../misc/Kite";
 import GirlSit from "../misc/girlSit";
 
 import "../login/loginPage.css";
 import "./signupPage.css";
-
-import { SERVER_URL } from "../../actions/types";
 
 class SignupMain extends Component {
   state = {
@@ -22,25 +20,15 @@ class SignupMain extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const { formEmail, formUserName, formPassword } = this.state;
+    let userData = {
+      userName: formUserName,
+      email: formEmail,
+      password: formPassword,
+    };
 
-    try {
-      let res = await fetch(`${SERVER_URL}/signup`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          userName: formUserName,
-          email: formEmail,
-          password: formPassword,
-        }),
-      });
-
-      res = await res.json();
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
+    //call the signup method
+    this.props.signupUser(userData);
+    //if sucess redirect to the login page
   };
 
   handleFormChange = (e) => {
@@ -50,8 +38,10 @@ class SignupMain extends Component {
   render() {
     return (
       <div className="loginMain">
+        {this.props.signupSucess ? <Redirect to={`/login`} /> : null}
         <div className="leftBox">
           {this.props.loading ? <span>loading</span> : null}
+          {this.props.signupSucess ? <span>sucess</span> : null}
           <div className="logoPic">
             <Kite></Kite>
           </div>
@@ -115,11 +105,13 @@ class SignupMain extends Component {
 
 SignupMain.propTypes = {
   loading: PropTypes.bool,
-  loginUser: PropTypes.func.isRequired,
+  signupUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.loginData.loading,
+  loading: state.signupData.loading,
+  signupSucess: state.signupData.signupSucess,
+  signedupUserName: state.signupData.userName,
 });
 
-export default connect(mapStateToProps, { loginUser })(SignupMain);
+export default connect(mapStateToProps, { signupUser })(SignupMain);
