@@ -1,27 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { logoutUser } from "../../actions/logoutActions";
+import LeftPanel from "./chatComponents/leftPanel/leftPanel";
+import ChatMessages from "./chatComponents/chatMessagesPanel/chatMessages";
+import RightPanel from "./chatComponents/rightPanel/rightPanel";
 
-import LeftPanel from "./chatComponents/leftPanel";
+import "./chatPage.css";
 
 class ChatMain extends Component {
   state = {};
   render() {
-    const { userName } = this.props.userDetails;
     return (
       <div className="chatMain">
         <LeftPanel />
-        <span>chat here</span>
-        {userName}
-        <button onClick={this.props.logoutUser}>LOGOUT</button>
+        <ChatMessages />
+        <RightPanel />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  userDetails: state.loginData.userDetails,
-});
-
-export default connect(mapStateToProps, { logoutUser })(ChatMain);
+export default connect(null, null)(ChatMain);

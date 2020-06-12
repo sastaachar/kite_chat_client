@@ -1,0 +1,48 @@
+.chatLeftPanel {
+  height: 100vh;
+  width: 24.67vw;
+  background-color: #19183f;
+}
+
+.userName-big::before {
+  content: "@";
+  color: #faff0a;
+}
+
+.profilePic {
+  width: 130px;
+  height: 130px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-size: cover;
+  border: 3px solid var(--light);
+}
+.profilePic:hover {
+  border: 3px solid #faff0a;
+}
+.userInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* for vertical alignment */
+  align-items: center;
+  height: 26vh;
+  border-bottom: 2px solid var(--light);
+}
+.userName-container {
+  color: #faff0a;
+  margin: 0px 30px;
+
+  /* for ... in overflow */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.userName-big {
+  color: white;
+  font-size: 1.5rem;
+}
+.userinfo-small {
+  color: #f3f3f3;
+  font-size: 0.7rem;
+}
