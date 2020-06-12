@@ -12,11 +12,12 @@ export const loginUser = (userData) => (dispatch) => {
   });
 
   let responseOK;
+  let headers = new Headers();
+  headers.append("Content-Type", "application/json");
+
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     credentials: "include",
     body: JSON.stringify(userData),
   })
