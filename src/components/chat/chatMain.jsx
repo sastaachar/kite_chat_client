@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import LeftPanel from "./chatComponents/leftPanel/leftPanel";
-import ChatMessages from "./chatComponents/chatMessagesPanel/chatMessages";
+import ChatMessagePanel from "./chatComponents/chatMessagesPanel/chatMessagePanel";
 import RightPanel from "./chatComponents/rightPanel/rightPanel";
 
 import "./chatPage.css";
@@ -13,7 +13,7 @@ class ChatMain extends Component {
     return (
       <div className="chatMain">
         <LeftPanel />
-        <ChatMessages />
+        <ChatMessagePanel />
         <RightPanel />
       </div>
     );

@@ -1,9 +1,12 @@
 .chatLeftPanel {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 24.67vw;
   background-color: #19183f;
 }
 
+/* User info start */
 .userName-big::before {
   content: "@";
   color: #faff0a;
@@ -26,8 +29,8 @@
   justify-content: center;
   /* for vertical alignment */
   align-items: center;
-  height: 26vh;
   border-bottom: 2px solid var(--light);
+  padding: 20px 0px;
 }
 .userName-container {
   color: #faff0a;
@@ -45,4 +48,20 @@
 .userinfo-small {
   color: #f3f3f3;
   font-size: 0.7rem;
+}
+
+/* User info end */
+
+/* friend options info start */
+
+.friendOptions {
+  border-bottom: 2px solid var(--light);
+}
+
+.addFriend {
+  font-size: 1.5em;
+  color: var(--light);
+}
+.addFriend:hover {
+  cursor: pointer;
 }

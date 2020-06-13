@@ -1,6 +1,52 @@
 .chatMessagesPanel {
-  height: 100vh;
-  width: 50vw;
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100%;
+  width: 49.93vw;
   background-color: #22215b;
   color: #fff;
+}
+
+.sendMessageBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #151433;
+  min-height: 10.66vh;
+}
+
+.chatInputContainer {
+  box-sizing: border-box;
+  width: 87%;
+  min-height: 40px;
+  max-height: 80px;
+  scrollbar-width: thin;
+  position: relative;
+  border-radius: 20px;
+  color: black;
+  background-color: #fff;
+  padding: 1%;
+  margin: 10px 0px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.cahatInput {
+  position: absolute;
+
+  min-height: 6.78vh;
+  max-height: 15vh;
+  padding: 10px 10px;
+
+  width: 90%;
+  align-items: center;
+  border: none;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.chatInput:focus {
+  outline: none;
 }

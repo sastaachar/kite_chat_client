@@ -11,9 +11,7 @@ class RightPanel extends Component {
     return (
       <div className="chatRightPanel">
         <div className="logoutBox">
-          <a href="/#" onClick={this.props.logoutUser}>
-            Logout
-          </a>
+          <span onClick={this.props.logoutUser}>Logout</span>
         </div>
         <div>part2</div>
         <div>part3</div>
