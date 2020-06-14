@@ -8,8 +8,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import "./App.css";
-
 //import MainPage from "./components/main/mainPage";
 import ChatMain from "./components/chat/chatMain";
 import LoginMain from "./components/login/loginMain";
@@ -21,6 +19,8 @@ import LoadingPage from "./components/misc/loadingPage";
 import PreCheckRoute from "./components/misc/preCheckRoute";
 
 import store from "./store";
+
+//need to add a way to redirect users from the http version to https
 
 class App extends Component {
   state = {};

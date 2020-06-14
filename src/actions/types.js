@@ -15,7 +15,6 @@ export const SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:5000"
     : "https://kite-chat-sever.herokuapp.com";
-
 export const CLIENT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
