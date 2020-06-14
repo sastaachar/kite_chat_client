@@ -23,8 +23,14 @@ import store from "./store";
 //need to add a way to redirect users from the http version to https
 
 class App extends Component {
+  //redirect to https
+  constructor(props, context) {
+    const url = window.location.origin;
+    if (!url.includes("localhost") && !url.includes("https")) {
+      window.location = `https:${url.split(":")[1]}`;
+    }
+  }
   state = {};
-
   render() {
     return (
       <Provider store={store}>
