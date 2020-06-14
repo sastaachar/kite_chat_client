@@ -20,7 +20,6 @@ export const loginUser = (userData) => (dispatch) => {
   let responseOK;
   let headers = new Headers();
   headers.append("Content-Type", "application/json");
-  headers.append("Accept", "application/json");
   headers.append("Origin", "http://kite-chat.herokuapp.com");
   headers.append("Access-Control-Allow-Credentials", "true");
   fetch(`${SERVER_URL}/users/login`, {
