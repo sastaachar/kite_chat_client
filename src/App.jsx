@@ -25,6 +25,7 @@ import store from "./store";
 class App extends Component {
   //redirect to https
   constructor(props, context) {
+    super();
     const url = window.location.origin;
     if (!url.includes("localhost") && !url.includes("https")) {
       window.location = `https:${url.split(":")[1]}`;
