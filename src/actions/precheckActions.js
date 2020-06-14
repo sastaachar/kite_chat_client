@@ -12,6 +12,7 @@ export const preCheck = () => (dispatch) => {
   });
 
   let responseOK;
+
   fetch(`${SERVER_URL}/users`, {
     credentials: "include",
   })
@@ -29,7 +30,7 @@ export const preCheck = () => (dispatch) => {
       return jsonRes;
     })
     .then((res) => {
-      //user alrady logged in
+      //user has already logged in this pc
       dispatch({
         type: LOGIN_SUCESS,
         payload: res.userDetails,
@@ -37,6 +38,7 @@ export const preCheck = () => (dispatch) => {
     })
     .catch((err) => {
       //the preCheck failed
+      // no user found on this pc
       dispatch({
         type: PRECHECK_FAIL,
         payload: err.message,

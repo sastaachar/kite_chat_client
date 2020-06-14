@@ -1,4 +1,10 @@
-import { LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAIL, SERVER_URL } from "./types";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCESS,
+  LOGIN_FAIL,
+  SERVER_URL,
+  CLIENT_URL,
+} from "./types";
 
 // login
 export const loginUser = (userData) => (dispatch) => {
@@ -14,7 +20,8 @@ export const loginUser = (userData) => (dispatch) => {
   let responseOK;
   let headers = new Headers();
   headers.append("Content-Type", "application/json");
-
+  headers.append("Origin", "http://kite-chat.herokuapp.com");
+  headers.append("Access-Control-Allow-Credentials", "true");
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
     headers,
