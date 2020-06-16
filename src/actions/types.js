@@ -27,4 +27,4 @@ export const CLIENT_URL =
 export const CHAT_SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2500"
-    : "https://kite-chat_chatserver.herokuapp.com";
+    : "https://kite-chat-chatserver.herokuapp.com";
