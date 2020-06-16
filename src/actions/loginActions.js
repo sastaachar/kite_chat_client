@@ -20,12 +20,13 @@ export const loginUser = (userData) => (dispatch) => {
   let responseOK;
   let headers = new Headers();
   headers.append("Content-Type", "application/json");
-  headers.append("Origin", "http://kite-chat.herokuapp.com");
+  headers.append("Access-Control-Allow-Origin", "https://localhost:3000");
+  headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
     headers,
-    credentials: "include",
+    //credentials: "include",
     body: JSON.stringify(userData),
   })
     .then((res) => {
