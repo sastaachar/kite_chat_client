@@ -11,6 +11,7 @@ export const SIGNUP_SUCESS = "SIGNUP_SUCESS";
 export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const SOCKETCON_FAIL = "SOCKETCON_FAIL";
 export const SOCKETCON_SUCESS = "SOCKETCON_SUCESS";
+export const SOCKETCON_REQUEST = "SOCKETCON_REQUEST";
 
 //pls forgive me for declaring these here.
 export const SERVER_URL =
@@ -22,3 +23,8 @@ export const CLIENT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
     : "https://kite-chat.herokuapp.com";
+
+export const CHAT_SERVER_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2500"
+    : "https://kite-chat_chatserver.herokuapp.com";

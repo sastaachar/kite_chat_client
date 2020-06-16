@@ -3,6 +3,7 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCESS,
   SERVER_URL,
+  CLIENT_URL,
 } from "./types";
 
 // signup
@@ -16,12 +17,15 @@ export const signupUser = (userData) => (dispatch) => {
     payload: {},
   });
 
+  let headers = new Headers();
+  //no need for these stupid header
+  headers.append("Content-Type", "application/json");
+  headers.append("Origin", CLIENT_URL);
+  headers.append("Access-Control-Allow-Credentials", "true");
   let responseOK;
   fetch(`${SERVER_URL}/users/signup`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: JSON.stringify(userData),
   })
     .then((res) => {

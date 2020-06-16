@@ -21,7 +21,6 @@ export const loginUser = (userData) => (dispatch) => {
   let headers = new Headers();
   //no need for these stupid header
   headers.append("Content-Type", "application/json");
-  headers.append("Access-Control-Allow-Origin", "https://localhost:3000");
   headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
   fetch(`${SERVER_URL}/users/login`, {

@@ -3,6 +3,7 @@ import {
   LOGIN_SUCESS,
   PRECHECK_FAIL,
   SERVER_URL,
+  CLIENT_URL,
 } from "./types";
 
 // login
@@ -11,9 +12,14 @@ export const preCheck = () => (dispatch) => {
     type: PRECHECK_REQUEST,
   });
 
+  let headers = new Headers();
+  //no need for these stupid header
+  headers.append("Content-Type", "application/json");
+  headers.append("Origin", CLIENT_URL);
+  headers.append("Access-Control-Allow-Credentials", "true");
   let responseOK;
-
   fetch(`${SERVER_URL}/users`, {
+    headers,
     credentials: "include",
   })
     .then((res) => {

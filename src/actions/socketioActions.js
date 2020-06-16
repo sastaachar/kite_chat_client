@@ -1,18 +1,28 @@
 import io from "socket.io-client";
 
-import { SERVER_URL, SOCKETCON_SUCESS, SOCKETCON_FAIL } from "./types";
+import {
+  CHAT_SERVER_URL,
+  SOCKETCON_SUCESS,
+  SOCKETCON_FAIL,
+  SOCKETCON_REQUEST,
+} from "./types";
 
 export const socketioConnection = () => (dispatch) => {
-  let socket = io(SERVER_URL);
-  console.log(socket, socket.id);
-  if (socket.connected) {
+  dispatch({
+    type: SOCKETCON_REQUEST,
+  });
+  let socket = io(CHAT_SERVER_URL);
+  socket.on("connected", (msg) => {
     dispatch({
       type: SOCKETCON_SUCESS,
       payload: socket,
     });
-  } else {
-    dispatch({
-      type: SOCKETCON_FAIL,
-    });
-  }
+  });
+};
+
+//call this if socket could not be connected
+export const socketConTimeout = () => (dispatch) => {
+  dispatch({
+    type: SOCKETCON_FAIL,
+  });
 };
