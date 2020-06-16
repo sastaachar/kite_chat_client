@@ -19,6 +19,7 @@ export const loginUser = (userData) => (dispatch) => {
 
   let responseOK;
   let headers = new Headers();
+  //no need for these stupid header
   headers.append("Content-Type", "application/json");
   headers.append("Access-Control-Allow-Origin", "https://localhost:3000");
   headers.append("Origin", CLIENT_URL);
@@ -26,7 +27,7 @@ export const loginUser = (userData) => (dispatch) => {
   fetch(`${SERVER_URL}/users/login`, {
     method: "POST",
     headers,
-    //credentials: "include",
+    credentials: "include",
     body: JSON.stringify(userData),
   })
     .then((res) => {
