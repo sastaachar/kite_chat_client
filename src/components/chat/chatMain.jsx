@@ -12,7 +12,7 @@ class ChatMain extends Component {
 
   componentDidMount() {
     //call the socketioConnection here
-    this.props.socketioConnection();
+    this.props.socketioConnection(this.props.jwtToken);
   }
 
   render() {
@@ -26,7 +26,8 @@ class ChatMain extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  socket: state.socket,
+  socket: state.socketData.socket,
+  jwtToken: state.loginData.userDetails.jwtToken,
 });
 
 export default connect(mapStateToProps, { socketioConnection })(ChatMain);

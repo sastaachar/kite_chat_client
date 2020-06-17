@@ -7,11 +7,22 @@ import {
   SOCKETCON_REQUEST,
 } from "./types";
 
-export const socketioConnection = () => (dispatch) => {
+export const socketioConnection = (jwtToken) => (dispatch) => {
   dispatch({
     type: SOCKETCON_REQUEST,
   });
-  let socket = io(CHAT_SERVER_URL);
+  const options = {
+    transportOptions: {
+      polling: {
+        extraHeaders: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      },
+    },
+  };
+  console.log("requesting ", CHAT_SERVER_URL, " with ", jwtToken);
+  let socket = io.connect(CHAT_SERVER_URL, options);
+
   socket.on("connected", (msg) => {
     dispatch({
       type: SOCKETCON_SUCESS,
