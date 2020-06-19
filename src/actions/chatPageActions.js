@@ -1,24 +1,23 @@
 import {
-  PRECHECK_REQUEST,
-  LOGIN_SUCESS,
-  PRECHECK_FAIL,
+  FRIENDINFO_REQUEST,
+  FRIENDINFO_SUCESS,
+  FRIENDINFO_FAIL,
   SERVER_URL,
   CLIENT_URL,
 } from "./types";
 
-// login
-export const preCheck = () => (dispatch) => {
+export const getFriendInfo = () => (dispatch) => {
   dispatch({
-    type: PRECHECK_REQUEST,
+    type: FRIENDINFO_REQUEST,
   });
-
+  let responseOK;
   let headers = new Headers();
   //no need for these stupid header
   headers.append("Content-Type", "application/json");
   headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
-  let responseOK;
-  fetch(`${SERVER_URL}/users`, {
+  fetch(`${SERVER_URL}/users/friendDetails`, {
+    method: "GET",
     headers,
     credentials: "include",
   })
@@ -35,19 +34,16 @@ export const preCheck = () => (dispatch) => {
       }
       return jsonRes;
     })
-    .then((res) => {
-      //user has already logged in this pc
+    .then((friendInfo) => {
       dispatch({
-        type: LOGIN_SUCESS,
-        payload: res.userDetails,
+        type: FRIENDINFO_SUCESS,
+        payload: friendInfo,
       });
     })
     .catch((err) => {
-      //the preCheck failed
-      // no user found on this pc
       dispatch({
-        type: PRECHECK_FAIL,
-        payload: err.message,
+        type: FRIENDINFO_FAIL,
+        error: err.message,
       });
     });
 };

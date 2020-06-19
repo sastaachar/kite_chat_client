@@ -6,8 +6,6 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  userName: "",
-  token: "",
   loading: false,
   error: "",
 };

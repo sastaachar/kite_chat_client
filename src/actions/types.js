@@ -12,7 +12,9 @@ export const SIGNUP_FAIL = "SIGNUP_FAIL";
 export const SOCKETCON_FAIL = "SOCKETCON_FAIL";
 export const SOCKETCON_SUCESS = "SOCKETCON_SUCESS";
 export const SOCKETCON_REQUEST = "SOCKETCON_REQUEST";
-
+export const FRIENDINFO_REQUEST = "FRIENDINFO_REQUEST";
+export const FRIENDINFO_SUCESS = "FRIENDINFO_SUCESS";
+export const FRIENDINFO_FAIL = "FRIENDINFO_FAIL";
 //pls forgive me for declaring these here.
 export const SERVER_URL =
   process.env.NODE_ENV === "development"

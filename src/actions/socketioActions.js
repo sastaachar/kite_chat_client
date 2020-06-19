@@ -20,14 +20,20 @@ export const socketioConnection = (jwtToken) => (dispatch) => {
       },
     },
   };
-  console.log("requesting ", CHAT_SERVER_URL, " with ", jwtToken);
   let socket = io.connect(CHAT_SERVER_URL, options);
-
+  //just for a comformation
   socket.on("connected", (msg) => {
     dispatch({
       type: SOCKETCON_SUCESS,
       payload: socket,
     });
+  });
+  socket.on("disconnected", (msg) => {
+    dispatch({
+      type: SOCKETCON_FAIL,
+      payload: msg,
+    });
+    alert(msg);
   });
 };
 
@@ -35,5 +41,6 @@ export const socketioConnection = (jwtToken) => (dispatch) => {
 export const socketConTimeout = () => (dispatch) => {
   dispatch({
     type: SOCKETCON_FAIL,
+    payload: "Timeout Error",
   });
 };
