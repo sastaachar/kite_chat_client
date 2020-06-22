@@ -4,9 +4,11 @@ import {
   FRIENDINFO_FAIL,
   SERVER_URL,
   CLIENT_URL,
+  FIREND_DISCONNECTED,
+  FIREND_CONNECTED,
 } from "./types";
 
-export const getFriendInfo = () => (dispatch) => {
+export const getFriendInfo = (socket) => (dispatch) => {
   dispatch({
     type: FRIENDINFO_REQUEST,
   });
@@ -16,6 +18,7 @@ export const getFriendInfo = () => (dispatch) => {
   headers.append("Content-Type", "application/json");
   headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
+
   fetch(`${SERVER_URL}/users/friendDetails`, {
     method: "GET",
     headers,
@@ -34,11 +37,19 @@ export const getFriendInfo = () => (dispatch) => {
       }
       return jsonRes;
     })
-    .then((friendInfo) => {
-      dispatch({
-        type: FRIENDINFO_SUCESS,
-        payload: friendInfo,
-      });
+    .then(({ allFriends }) => {
+      console.log("emit here");
+      //dispatch once we get both the friendsList and the onlineFriends
+      socket.emit(
+        "onlineFriendList",
+        allFriends.map((friend) => friend.userName),
+        ({ onlineFriends }) => {
+          dispatch({
+            type: FRIENDINFO_SUCESS,
+            payload: { allFriends, onlineFriends },
+          });
+        }
+      );
     })
     .catch((err) => {
       dispatch({
@@ -46,4 +57,18 @@ export const getFriendInfo = () => (dispatch) => {
         error: err.message,
       });
     });
+};
+
+export const friendConnected = (userName) => (dispatch) => {
+  dispatch({
+    type: FIREND_CONNECTED,
+    payload: userName,
+  });
+};
+
+export const friendDisconnected = (userName) => (dispatch) => {
+  dispatch({
+    type: FIREND_DISCONNECTED,
+    payload: userName,
+  });
 };

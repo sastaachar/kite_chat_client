@@ -20,6 +20,8 @@ import PreCheckRoute from "./components/misc/preCheckRoute";
 
 import store from "./store";
 
+import "./App.css";
+
 //need to add a way to redirect users from the http version to https
 
 class App extends Component {

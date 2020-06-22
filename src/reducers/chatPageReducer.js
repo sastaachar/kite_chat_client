@@ -2,9 +2,17 @@ import {
   FRIENDINFO_REQUEST,
   FRIENDINFO_FAIL,
   FRIENDINFO_SUCESS,
+  FIREND_DISCONNECTED,
+  FIREND_CONNECTED,
 } from "../actions/types";
 
-export default function (state = {}, action) {
+const initialState = {
+  friendListWait: false,
+  friendsInfo: { allFriends: [], onlineFriends: [] },
+  error: "",
+};
+
+export default function (state = initialState, action) {
   switch (action.type) {
     case FRIENDINFO_REQUEST:
       return {
@@ -21,7 +29,25 @@ export default function (state = {}, action) {
       return {
         ...state,
         friendListWait: false,
-        friendInfo: action.payload,
+        friendsInfo: action.payload,
+      };
+    case FIREND_DISCONNECTED:
+      return {
+        ...state,
+        friendsInfo: {
+          ...state.friendsInfo,
+          onlineFriends: state.friendsInfo.onlineFriends.filter(
+            (userName) => userName != action.payload
+          ),
+        },
+      };
+    case FIREND_CONNECTED:
+      return {
+        ...state,
+        friendsInfo: {
+          ...state.friendsInfo,
+          onlineFriends: [...state.friendsInfo.onlineFriends, action.payload],
+        },
       };
     default:
       return state;

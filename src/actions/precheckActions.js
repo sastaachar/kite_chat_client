@@ -17,6 +17,7 @@ export const preCheck = () => (dispatch) => {
   headers.append("Content-Type", "application/json");
   headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
+
   let responseOK;
   fetch(`${SERVER_URL}/users`, {
     headers,

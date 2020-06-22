@@ -15,6 +15,8 @@ export const SOCKETCON_REQUEST = "SOCKETCON_REQUEST";
 export const FRIENDINFO_REQUEST = "FRIENDINFO_REQUEST";
 export const FRIENDINFO_SUCESS = "FRIENDINFO_SUCESS";
 export const FRIENDINFO_FAIL = "FRIENDINFO_FAIL";
+export const FIREND_CONNECTED = "FIREND_CONNECTED";
+export const FIREND_DISCONNECTED = "FIREND_DISCONNECTED";
 //pls forgive me for declaring these here.
 export const SERVER_URL =
   process.env.NODE_ENV === "development"
