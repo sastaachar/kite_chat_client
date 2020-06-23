@@ -31,6 +31,8 @@ class ChatMain extends Component {
         <ChatMessagePanel />
         <RightPanel />
       </div>
+    ) : this.props.waitForSocket ? (
+      <div>waiting</div>
     ) : (
       <AlreadyConnected />
     );
@@ -38,6 +40,7 @@ class ChatMain extends Component {
 }
 const mapStateToProps = (state) => ({
   socket: state.socketData.socket,
+  waitForSocket: state.socketData.waitForSocket,
   socketConnected: state.socketData.socketConnected,
   jwtToken: state.loginData.userDetails.jwtToken,
 });
