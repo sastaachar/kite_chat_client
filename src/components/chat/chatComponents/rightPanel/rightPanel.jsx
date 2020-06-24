@@ -1,23 +1,43 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import "./rightPartPanel.css";
 
 import { logoutUser } from "../../../../actions/logoutActions";
 
-class RightPanel extends Component {
-  state = {};
-  render() {
-    return (
-      <div className="chatRightPanel">
-        <div className="logoutBox">
-          <span onClick={this.props.logoutUser}>Logout</span>
-        </div>
-        <div>part2</div>
-        <div>part3</div>
-      </div>
-    );
-  }
-}
+const RightPanel = (props) => {
+  const { allFriends, selectedFriend, logoutUser } = props;
+  const user = allFriends.filter((ele) => ele.userName === selectedFriend)[0];
 
-export default connect(null, { logoutUser })(RightPanel);
+  return (
+    <div className="chatRightPanel">
+      <div className="logoutBox">
+        <span onClick={logoutUser}>Logout</span>
+      </div>
+      {user ? (
+        <div className="firendInfoBIg">
+          <div
+            className="profilePic big"
+            style={{
+              backgroundImage: `url(${
+                user.profilePic
+                  ? user.profilePic.url
+                  : process.env.PUBLIC_URL + "/defaultUserIcon.png"
+              })`,
+            }}
+          />
+          <span className="userName-big">{user.userName}</span>
+        </div>
+      ) : (
+        <span>Select a user to Chat</span>
+      )}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  selectedFriend: state.chatPageData.selectedFriend,
+  allFriends: state.chatPageData.friendsInfo.allFriends,
+});
+
+export default connect(mapStateToProps, { logoutUser })(RightPanel);

@@ -34,7 +34,6 @@ export default function (state = initialState, action) {
         socketConnected: false,
         error: action.payload,
       };
-
     default:
       return state;
   }

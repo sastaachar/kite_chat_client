@@ -5,6 +5,7 @@ import {
   SOCKETCON_SUCESS,
   SOCKETCON_FAIL,
   SOCKETCON_REQUEST,
+  RECV_MESSAGE,
 } from "./types";
 
 export const socketioConnection = (jwtToken) => (dispatch) => {
@@ -28,12 +29,17 @@ export const socketioConnection = (jwtToken) => (dispatch) => {
       payload: socket,
     });
   });
+  socket.on("RECV_MESSAGE", (msg) => {
+    dispatch({
+      type: RECV_MESSAGE,
+      payload: msg,
+    });
+  });
   socket.on("disconnected", (msg) => {
     dispatch({
       type: SOCKETCON_FAIL,
       payload: msg,
     });
-    alert(msg);
   });
 };
 

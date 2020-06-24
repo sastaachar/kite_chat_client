@@ -17,6 +17,10 @@ export const FRIENDINFO_SUCESS = "FRIENDINFO_SUCESS";
 export const FRIENDINFO_FAIL = "FRIENDINFO_FAIL";
 export const FIREND_CONNECTED = "FIREND_CONNECTED";
 export const FIREND_DISCONNECTED = "FIREND_DISCONNECTED";
+export const FIREND_SELECTED = "FIREND_SELECTED";
+export const RECV_MESSAGE = "RECV_MESSAGE";
+export const SEND_MESSAGE = "SEND_MESSAGE";
+
 //pls forgive me for declaring these here.
 export const SERVER_URL =
   process.env.NODE_ENV === "development"

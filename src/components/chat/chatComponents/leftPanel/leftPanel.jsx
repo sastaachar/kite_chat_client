@@ -35,9 +35,17 @@ class LeftPanel extends Component {
         <div className="friendsList">
           {allFriends.map((friend) =>
             onlineFriends.includes(friend.userName) ? (
-              <FriendListItem user={friend} status="active" />
+              <FriendListItem
+                user={friend}
+                status="active"
+                key={friend.userName}
+              />
             ) : (
-              <FriendListItem user={friend} status="inactive" />
+              <FriendListItem
+                user={friend}
+                status="inactive"
+                key={friend.userName}
+              />
             )
           )}
         </div>

@@ -13,7 +13,7 @@ import "./chatPage.css";
 class ChatMain extends Component {
   state = {};
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     //call the socketioConnection here
     //connect to scoket
     this.props.socketioConnection(this.props.jwtToken);
@@ -32,7 +32,7 @@ class ChatMain extends Component {
         <RightPanel />
       </div>
     ) : this.props.waitForSocket ? (
-      <div>waiting</div>
+      <div>waiting </div>
     ) : (
       <AlreadyConnected />
     );

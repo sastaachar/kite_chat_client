@@ -5,7 +5,7 @@ class FriendOptions extends Component {
   render() {
     return (
       <div className="friendOptions">
-        <span className="addFriend">&#43;</span>
+        <span className="addFriend">&#43;&#9662;</span>
       </div>
     );
   }

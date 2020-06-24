@@ -6,6 +6,8 @@ import {
   CLIENT_URL,
   FIREND_DISCONNECTED,
   FIREND_CONNECTED,
+  FIREND_SELECTED,
+  SEND_MESSAGE,
 } from "./types";
 
 export const getFriendInfo = (socket) => (dispatch) => {
@@ -38,7 +40,6 @@ export const getFriendInfo = (socket) => (dispatch) => {
       return jsonRes;
     })
     .then(({ allFriends }) => {
-      console.log("emit here");
       //dispatch once we get both the friendsList and the onlineFriends
       socket.emit(
         "onlineFriendList",
@@ -70,5 +71,19 @@ export const friendDisconnected = (userName) => (dispatch) => {
   dispatch({
     type: FIREND_DISCONNECTED,
     payload: userName,
+  });
+};
+
+export const selectFriend = (userName) => (dispatch) => {
+  dispatch({
+    type: FIREND_SELECTED,
+    payload: userName,
+  });
+};
+
+export const sendMessage = (message) => (dispatch) => {
+  dispatch({
+    type: SEND_MESSAGE,
+    payload: message,
   });
 };
