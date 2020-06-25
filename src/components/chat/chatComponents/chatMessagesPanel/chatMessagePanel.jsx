@@ -24,6 +24,7 @@ class ChatMessagePanel extends Component {
       };
       this.props.socket.emit("SEND_MESSAGE", message);
       this.props.sendMessage(message);
+      this.setState({ message: "" });
     }
   };
   handleChange = (e) => {
@@ -34,6 +35,7 @@ class ChatMessagePanel extends Component {
     const { messages, selectedFriend, allFriends, selfUrl } = this.props;
     const user = allFriends.filter((ele) => ele.userName === selectedFriend)[0];
     return (
+      // the divs are placed in an inverted manner to make them stick at bottom by using coloumn-reverse
       <div className="chatMessagesPanel">
         <div className="sendMessageBox">
           <div className="chatType">choose</div>

@@ -15,8 +15,8 @@ const MessageBox = (props) => {
         }}
       />
       <div className="messageBox">
-        <span>{content.text}</span>
-        <span>{content.timestamp}</span>
+        <span className="message-text">{content.text}</span>
+        <span className="message-timestamp">{content.timestamp}</span>
       </div>
     </div>
   );
