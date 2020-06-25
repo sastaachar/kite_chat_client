@@ -24,7 +24,9 @@ class ChatMessagePanel extends Component {
       };
       this.props.socket.emit("SEND_MESSAGE", message);
       this.props.sendMessage(message);
+      //this is a bit wierd cauase i am using a editable div
       this.setState({ message: "" });
+      document.getElementById("chatMessage").innerText = "";
     }
   };
   handleChange = (e) => {
@@ -41,6 +43,7 @@ class ChatMessagePanel extends Component {
           <div className="chatType">choose</div>
           <div className="chatInputContainer">
             <div
+              id="chatMessage"
               onInput={this.handleChange}
               className="chatInput"
               contentEditable="true"
