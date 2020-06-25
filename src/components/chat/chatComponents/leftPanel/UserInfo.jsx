@@ -9,9 +9,15 @@ class UserInfo extends Component {
     return (
       <div className="userInfo">
         <div
-          style={{ backgroundImage: `url(${userDetails.profilePic.url})` }}
           className="profilePic"
-        ></div>
+          style={{
+            backgroundImage: `url(${
+              userDetails.profilePic.url
+                ? userDetails.profilePic.url
+                : process.env.PUBLIC_URL + "/defaultUserIcon.png"
+            })`,
+          }}
+        />
         <div className="userName-container">
           <span className="userName-big">{userDetails.userName}</span>
           <br />

@@ -17,7 +17,7 @@ const RightPanel = (props) => {
       {user ? (
         <div className="firendInfoBIg">
           <div
-            className="profilePic big"
+            className="profilePic picBig"
             style={{
               backgroundImage: `url(${
                 user.profilePic

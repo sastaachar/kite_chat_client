@@ -9,40 +9,37 @@
 }
 
 .sendMessageBox {
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
   background-color: #151433;
-  min-height: 10.66vh;
+  height: fit-content;
 }
-
 .chatInputContainer {
   box-sizing: border-box;
   width: 80%;
-  min-height: 40px;
+  margin: 10px;
+  min-height: 20px;
   max-height: 150px;
-  scrollbar-width: thin;
   position: relative;
   border-radius: 20px;
   color: black;
   background-color: #fff;
   padding: 1%;
-  margin: 10px 0px;
   overflow-x: hidden;
   overflow-y: auto;
 }
-.cahatInput {
-  position: absolute;
-
-  min-height: 6.78vh;
+.chatInput {
+  position: relative;
+  margin: 10px;
+  min-height: 10px;
   max-height: 15vh;
-  padding: 10px 10px;
-
-  width: 90%;
+  width: 95%;
+  padding-right: 10px;
   align-items: center;
   border: none;
-  bottom: 0;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -54,4 +51,39 @@
 .sendBtn {
   position: relative;
   top: 4px;
+}
+
+/* messageBox */
+.picSmall {
+  height: 39px;
+  width: 39px;
+  border-width: 1px;
+}
+.picSmall:hover {
+  border-width: 1px;
+}
+
+.chatMessageContainer {
+  overflow-y: scroll;
+}
+.messageContainer {
+  position: relative;
+  margin: 10px;
+  display: flex;
+}
+.messageBox {
+  position: relative;
+  top: 5px;
+  max-width: 50%;
+  max-height: 1000px;
+  padding: 10px;
+  border-radius: 20px;
+  color: black;
+  background-color: white;
+  margin: 10px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.sentMsg {
+  flex-direction: row-reverse;
 }

@@ -5,6 +5,7 @@ import { sendMessage } from "../../../../actions/chatPageActions";
 
 import "./chatMessagesPart.css";
 import SendBtn from "../../../misc/sendBtn.svg";
+import MessageBox from "./messageBox";
 
 class ChatMessagePanel extends Component {
   state = {
@@ -30,7 +31,8 @@ class ChatMessagePanel extends Component {
     this.setState({ message: e.target.innerText });
   };
   render() {
-    const { messages, selectedFriend } = this.props;
+    const { messages, selectedFriend, allFriends, selfUrl } = this.props;
+    const user = allFriends.filter((ele) => ele.userName === selectedFriend)[0];
     return (
       <div className="chatMessagesPanel">
         <div className="sendMessageBox">
@@ -48,8 +50,21 @@ class ChatMessagePanel extends Component {
         </div>
         <div className="chatMessageContainer">
           {messages[selectedFriend] ? (
-            messages[selectedFriend].map((msg) => (
-              <span key={msg.timestamp}>{msg.text}</span>
+            messages[selectedFriend].map((content) => (
+              <MessageBox
+                content={content}
+                key={content.timestamp}
+                imageUrl={
+                  content.sentMsg
+                    ? selfUrl.url
+                      ? selfUrl.url
+                      : process.env.PUBLIC_URL + "/defaultUserIcon.png"
+                    : user.profilePic
+                    ? user.profilePic.url
+                    : process.env.PUBLIC_URL + "/defaultUserIcon.png"
+                }
+                sentMsg={content.sentMsg}
+              />
             ))
           ) : (
             <span>no msg</span>
@@ -61,7 +76,9 @@ class ChatMessagePanel extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  selfUrl: state.loginData.userDetails.profilePic,
   userName: state.loginData.userDetails.userName,
+  allFriends: state.chatPageData.friendsInfo.allFriends,
   messages: state.chatPageData.messages,
   selectedFriend: state.chatPageData.selectedFriend,
   socket: state.socketData.socket,
