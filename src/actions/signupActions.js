@@ -4,6 +4,7 @@ import {
   SIGNUP_SUCESS,
   SERVER_URL,
   CLIENT_URL,
+  SIGNUP_RESET,
 } from "./types";
 
 // signup
@@ -56,4 +57,10 @@ export const signupUser = (userData) => (dispatch) => {
         payload: err.message,
       });
     });
+};
+
+export const signupReset = () => (dispatch) => {
+  dispatch({
+    type: SIGNUP_RESET,
+  });
 };

@@ -20,6 +20,7 @@ export const FIREND_DISCONNECTED = "FIREND_DISCONNECTED";
 export const FIREND_SELECTED = "FIREND_SELECTED";
 export const RECV_MESSAGE = "RECV_MESSAGE";
 export const SEND_MESSAGE = "SEND_MESSAGE";
+export const SIGNUP_RESET = "SIGNUP_RESET";
 
 //pls forgive me for declaring these here.
 export const SERVER_URL =

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { signupUser } from "../../actions/signupActions";
+import { signupUser, signupReset } from "../../actions/signupActions";
 import Kite from "../misc/Kite";
 import GirlSit from "../misc/girlSit";
 
@@ -34,6 +34,10 @@ class SignupMain extends Component {
   handleFormChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  componentWillUnmount() {
+    if (this.props.signupSucess) this.props.signupReset();
+  }
 
   render() {
     return (
@@ -114,4 +118,6 @@ const mapStateToProps = (state) => ({
   signedupUserName: state.signupData.userName,
 });
 
-export default connect(mapStateToProps, { signupUser })(SignupMain);
+export default connect(mapStateToProps, { signupUser, signupReset })(
+  SignupMain
+);

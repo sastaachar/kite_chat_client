@@ -1,4 +1,9 @@
-import { SIGNUP_REQUEST, SIGNUP_FAIL, SIGNUP_SUCESS } from "../actions/types";
+import {
+  SIGNUP_REQUEST,
+  SIGNUP_FAIL,
+  SIGNUP_SUCESS,
+  SIGNUP_RESET,
+} from "../actions/types";
 
 const initialState = {
   signupSucess: false,
@@ -28,6 +33,11 @@ export default function (state = initialState, action) {
         signupSucess: false,
         loading: false,
         error: action.payload,
+      };
+    case SIGNUP_RESET:
+      return {
+        ...state,
+        signupSucess: false,
       };
     default:
       return state;

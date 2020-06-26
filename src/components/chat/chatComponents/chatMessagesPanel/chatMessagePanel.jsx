@@ -61,7 +61,7 @@ class ChatMessagePanel extends Component {
                 key={content.timestamp}
                 imageUrl={
                   content.sentMsg
-                    ? selfUrl.url
+                    ? selfUrl && selfUrl.url
                       ? selfUrl.url
                       : process.env.PUBLIC_URL + "/defaultUserIcon.png"
                     : user.profilePic
