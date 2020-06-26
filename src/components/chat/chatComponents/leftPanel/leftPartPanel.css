@@ -56,14 +56,53 @@
 
 .friendOptions {
   border-bottom: 2px solid var(--light);
+  text-align: center;
 }
 
 .addFriend {
-  font-size: 1.5em;
+  margin: 10px;
+  box-sizing: border-box;
+  font-size: 24px;
+  text-align: center;
+}
+.addFriend div {
+  display: inline;
+}
+.addFriend div::before {
+  content: "@";
+  color: #faff0a;
+}
+.addFriend div input {
+  padding: 0px 10px;
+  min-height: 3.8vh;
+  border-radius: 40px;
+  border: none;
+  outline: none;
+}
+.addFriend div input[type="text"] {
+  font-size: 16px;
+}
+.addFriend span {
+  position: relative;
+  left: 1vw;
   color: var(--light);
 }
-.addFriend:hover {
+.addFriend span:hover {
   cursor: pointer;
+}
+
+select {
+  font-family: Scope One;
+  border-radius: 35px;
+  padding-left: 5px;
+  padding-top: 2px;
+  outline: none;
+  margin-bottom: 10px;
+}
+select:active {
+  padding-top: 2px;
+  color: white;
+  background-color: var(--dark);
 }
 
 /* Friends list */

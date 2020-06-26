@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from "moment";
 
 const MessageBox = (props) => {
   const { content, imageUrl } = props;
@@ -16,7 +17,9 @@ const MessageBox = (props) => {
       />
       <div className="messageBox">
         <span className="message-text">{content.text}</span>
-        <span className="message-timestamp">{content.timestamp}</span>
+        <span className="message-timestamp">
+          {Moment(content.timestamp).format("MMMM Do YYYY, h:mm:ss a")}
+        </span>
       </div>
     </div>
   );
