@@ -69,7 +69,7 @@
   display: inline;
 }
 .addFriend div::before {
-  content: "@";
+  content: "@  ";
   color: #faff0a;
 }
 .addFriend div input {
