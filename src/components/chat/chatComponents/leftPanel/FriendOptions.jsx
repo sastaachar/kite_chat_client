@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
+import Cross from "../../../misc/svgs/addSign.svg";
+
 class FriendOptions extends Component {
   state = {};
-  // <li>&#9662;</li>
   render() {
     return (
       <div className="friendOptions">
@@ -10,7 +11,7 @@ class FriendOptions extends Component {
           <div>
             <input type="text" />
           </div>
-          <span>&#43;</span>
+          <img src={Cross} alt="" />
         </div>
         <div className="friendListTypeContainer">
           <select name="listTypes" id="listType">

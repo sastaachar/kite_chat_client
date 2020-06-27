@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { sendMessage } from "../../../../actions/chatPageActions";
 
 import "./chatMessagesPart.css";
-import SendBtn from "../../../misc/sendBtn.svg";
+import SendBtn from "../../../misc/svgs/sendBtn.svg";
 import MessageBox from "./messageBox";
 
 class ChatMessagePanel extends Component {

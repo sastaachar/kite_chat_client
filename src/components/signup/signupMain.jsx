@@ -36,6 +36,7 @@ class SignupMain extends Component {
   };
 
   componentWillUnmount() {
+    //if user signedin only then call this
     if (this.props.signupSucess) this.props.signupReset();
   }
 
