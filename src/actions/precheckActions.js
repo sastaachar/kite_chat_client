@@ -18,6 +18,7 @@ export const preCheck = () => (dispatch) => {
   headers.append("Origin", CLIENT_URL);
   headers.append("Access-Control-Allow-Credentials", "true");
 
+  //make new funtion out of this called getuser call it here and in the chatPageactions
   let responseOK;
   fetch(`${SERVER_URL}/users`, {
     headers,

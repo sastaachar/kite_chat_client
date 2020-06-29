@@ -3,6 +3,8 @@ import {
   LOGIN_SUCESS,
   LOGIN_FAIL,
   LOGOUT,
+  USERDATA_UPDATE_SUCESS,
+  USERDATA_UPDATE_FAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +38,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loggedIn: false,
+      };
+    case USERDATA_UPDATE_SUCESS:
+      return {
+        ...state,
+        userDetails: action.payload,
+      };
+    case USERDATA_UPDATE_FAIL:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

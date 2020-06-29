@@ -33,7 +33,8 @@
 }
 .chatInput {
   position: relative;
-  min-height: 10px;
+  min-height: 24px;
+  word-break: break-word;
   max-height: 15vh;
   margin: 10px;
   width: 95%;

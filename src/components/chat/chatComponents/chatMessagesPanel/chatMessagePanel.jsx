@@ -22,8 +22,7 @@ class ChatMessagePanel extends Component {
           timestamp: Date.now(),
         },
       };
-      this.props.socket.emit("SEND_MESSAGE", message);
-      this.props.sendMessage(message);
+      this.props.sendMessage(message, this.props.socket);
       //this is a bit wierd cauase i am using a editable div
       this.setState({ message: "" });
       document.getElementById("chatMessage").innerText = "";

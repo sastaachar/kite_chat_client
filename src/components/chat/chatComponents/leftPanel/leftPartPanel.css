@@ -54,6 +54,28 @@
 
 /* friend options info start */
 
+.reloadBtn {
+  position: absolute;
+  color: var(--light);
+  font-size: 21px;
+  margin-left: 2.9vw;
+  font-weight: bold;
+}
+.reloadBtn:hover {
+  cursor: pointer;
+}
+.spin {
+  animation: spin 4s infinite linear;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .friendOptions {
   border-bottom: 2px solid var(--light);
   text-align: center;

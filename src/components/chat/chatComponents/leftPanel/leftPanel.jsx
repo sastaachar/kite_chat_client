@@ -27,27 +27,78 @@ class LeftPanel extends Component {
   }
   render() {
     const { allFriends, onlineFriends } = this.props.friendsInfo;
+    let {
+      friends_list,
+      block_list,
+      pending_requests,
+      pending_approvals,
+    } = this.props.userDetails;
+
+    console.log(allFriends);
 
     return (
       <div className="chatLeftPanel">
         <UserInfo />
         <FriendOptions />
         <div className="friendsList">
-          {allFriends.map((friend) =>
-            onlineFriends.includes(friend.userName) ? (
-              <FriendListItem
-                user={friend}
-                status="active"
-                key={friend.userName}
-              />
-            ) : (
-              <FriendListItem
-                user={friend}
-                status="inactive"
-                key={friend.userName}
-              />
-            )
-          )}
+          {allFriends.map((friend) => {
+            if (block_list.includes(friend.userName)) {
+              //blocked friend
+              return (
+                <FriendListItem
+                  user={friend}
+                  type="Blocked"
+                  key={friend.userName}
+                />
+              );
+            } else if (pending_approvals.includes(friend.userName)) {
+              //pending approvals
+              return (
+                <FriendListItem
+                  user={friend}
+                  type="PendingApproval"
+                  key={friend.userName}
+                />
+              );
+            } else if (pending_requests.includes(friend.userName)) {
+              //pending requests active and inactive
+              return onlineFriends.includes(friend.userName) ? (
+                <FriendListItem
+                  user={friend}
+                  type="ActiveRequest"
+                  key={friend.userName}
+                />
+              ) : (
+                <FriendListItem
+                  user={friend}
+                  type="InActiveRequest"
+                  key={friend.userName}
+                />
+              );
+            } else if (friends_list.includes(friend.userName)) {
+              console.log("awd");
+              //friends active and inactive
+              return onlineFriends.includes(friend.userName) ? (
+                <FriendListItem
+                  user={friend}
+                  type="ActiveFriend"
+                  key={friend.userName}
+                />
+              ) : (
+                <FriendListItem
+                  user={friend}
+                  type="InActiveFriend"
+                  key={friend.userName}
+                />
+              );
+            } else {
+              return (
+                <div>
+                  <span> suckit </span>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     );
@@ -55,6 +106,7 @@ class LeftPanel extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  userDetails: state.loginData.userDetails,
   socket: state.socketData.socket,
   friendsInfo: state.chatPageData.friendsInfo,
 });
