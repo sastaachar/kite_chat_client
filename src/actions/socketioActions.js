@@ -8,6 +8,8 @@ import {
   RECV_MESSAGE,
 } from "./types";
 
+import store from "../store";
+
 import { updateUserDetails } from "./chatPageActions";
 
 export const socketioConnection = (jwtToken) => (dispatch) => {
@@ -46,7 +48,8 @@ export const socketioConnection = (jwtToken) => (dispatch) => {
   socket.on("UPDATE_USER_DETAIL", (sender) => {
     //call the friend list
     //updateuserinfo
-    updateUserDetails(socket);
+    console.log("hi");
+    store.dispatch(updateUserDetails(socket));
   });
 };
 

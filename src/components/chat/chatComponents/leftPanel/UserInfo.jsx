@@ -12,7 +12,7 @@ class UserInfo extends Component {
           className="profilePic"
           style={{
             backgroundImage: `url(${
-              userDetails.profilePic.url
+              userDetails.profilePic
                 ? userDetails.profilePic.url
                 : process.env.PUBLIC_URL + "/defaultUserIcon.png"
             })`,

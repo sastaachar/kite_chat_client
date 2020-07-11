@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Cross from "../../../misc/svgs/addSign.svg";
-
-import { sendRequest } from "../../../../actions/chatPageActions";
+import {
+  sendRequest,
+  updateUserDetails,
+} from "../../../../actions/chatPageActions";
 
 class FriendOptions extends Component {
   state = {
@@ -24,7 +25,7 @@ class FriendOptions extends Component {
     return (
       <div className="friendOptions">
         <div className="addFriend">
-          <div>
+          <div className="addFrnd-input-container">
             <input
               name="addFriend"
               value={this.state.addFriend}
@@ -32,7 +33,7 @@ class FriendOptions extends Component {
               type="text"
             />
           </div>
-          <img onClick={this.handleAddFriend} src={Cross} alt="" />
+          <div className="addBtn" onClick={this.handleAddFriend} />
         </div>
         <div className="friendListTypeContainer">
           <select name="listTypes" id="listType">
@@ -41,7 +42,10 @@ class FriendOptions extends Component {
             <option value="offlineFrnds">Offline Friends</option>
             <option value="allFrnds">All Friends</option>
           </select>
-          <span className="reloadBtn">&#x21BA;</span>
+          <div
+            className={this.props.loading ? "reloadBtn spin" : "reloadBtn "}
+            onClick={() => this.props.updateUserDetails(this.props.socket)}
+          />
         </div>
       </div>
     );
@@ -49,8 +53,11 @@ class FriendOptions extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  loading: state.loginData.userDataLoading,
   userName: state.loginData.userDetails.userName,
   socket: state.socketData.socket,
 });
 
-export default connect(mapStateToProps, { sendRequest })(FriendOptions);
+export default connect(mapStateToProps, { sendRequest, updateUserDetails })(
+  FriendOptions
+);

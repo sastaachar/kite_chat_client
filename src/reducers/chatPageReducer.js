@@ -7,6 +7,7 @@ import {
   FIREND_SELECTED,
   RECV_MESSAGE,
   SEND_MESSAGE,
+  FIREND_REQ_SUCESS,
 } from "../actions/types";
 
 const initialState = {
@@ -85,6 +86,11 @@ export default function (state = initialState, action) {
           ],
         },
       };
+    case FIREND_REQ_SUCESS:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

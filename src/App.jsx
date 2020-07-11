@@ -47,10 +47,10 @@ class App extends Component {
               <LoadingPage />
             </PreCheckRoute>
             {
-              //if user tries to go to these paths after being
+              //if user tries to go to these paths after being loggedIn
               //but technically not possible cause the page will reload
               //the main page is suppposed to be in / route but the page sucks for now
-              //so we are going with login
+              //so we are going with login page
             }
 
             <UnauthenticatedRoute path="/login">

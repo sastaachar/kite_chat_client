@@ -5,6 +5,7 @@ import {
   LOGOUT,
   USERDATA_UPDATE_SUCESS,
   USERDATA_UPDATE_FAIL,
+  USERDATA_UPDATE_REQUEST,
 } from "../actions/types";
 
 const initialState = {
@@ -39,15 +40,22 @@ export default function (state = initialState, action) {
         ...state,
         loggedIn: false,
       };
+    case USERDATA_UPDATE_REQUEST:
+      return {
+        ...state,
+        userDataLoading: true,
+      };
     case USERDATA_UPDATE_SUCESS:
       return {
         ...state,
         userDetails: action.payload,
+        userDataLoading: false,
       };
     case USERDATA_UPDATE_FAIL:
       return {
         ...state,
         error: action.payload,
+        userDataLoading: false,
       };
     default:
       return state;

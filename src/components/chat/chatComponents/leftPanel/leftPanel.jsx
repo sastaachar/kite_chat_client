@@ -46,7 +46,7 @@ class LeftPanel extends Component {
               //blocked friend
               return (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="Blocked"
                   key={friend.userName}
                 />
@@ -55,7 +55,7 @@ class LeftPanel extends Component {
               //pending approvals
               return (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="PendingApproval"
                   key={friend.userName}
                 />
@@ -64,39 +64,34 @@ class LeftPanel extends Component {
               //pending requests active and inactive
               return onlineFriends.includes(friend.userName) ? (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="ActiveRequest"
                   key={friend.userName}
                 />
               ) : (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="InActiveRequest"
                   key={friend.userName}
                 />
               );
             } else if (friends_list.includes(friend.userName)) {
-              console.log("awd");
               //friends active and inactive
               return onlineFriends.includes(friend.userName) ? (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="ActiveFriend"
                   key={friend.userName}
                 />
               ) : (
                 <FriendListItem
-                  user={friend}
+                  friend={friend}
                   type="InActiveFriend"
                   key={friend.userName}
                 />
               );
             } else {
-              return (
-                <div>
-                  <span> suckit </span>
-                </div>
-              );
+              return null;
             }
           })}
         </div>
