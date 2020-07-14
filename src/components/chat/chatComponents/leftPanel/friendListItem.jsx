@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import {
   selectFriend,
-  sendRequest,
+  cancelRequest,
   removeFriend,
   respondRequest,
 } from "../../../../actions/chatPageActions";
 
-//types of friendList Item
-//                       Methods                            Profile
-//active friend          [selectFriend,removeFriend]                     +
-//inactive friend        [removeFriend]                                +
-//pending Requests(A,I)  [respondRequest]        +
-//pending approvals      [cancelRequest]                    -
-//blocked friends        [-]                                -
+import ContextMenu from "../contextMenu/contextMenu";
+
+// types of friendList Item
+// Type                   Description              Methods                       Profile
+// ActiveFriend           active friend            [selectFriend,removeFriend]      +
+// InActiveFriend         inactive friend          [removeFriend]                   +
+// (In?)ActiveRequest     pending Requests(A,I)    [respondRequest]                 +
+// PendingApproval        pending approvals        [cancelRequest]                  -
+// BlockedFriend          blocked friends          [-]                              -
 //*note (A,I) - active and inactive
 
 const FriendListItem = (props) => {
@@ -27,9 +29,15 @@ const FriendListItem = (props) => {
     removeFriend,
   } = props;
 
+  const [pos, setPos] = useState([0, 0]);
+  const [visible, setVisible] = useState(false);
+
   const handleContextMenu = (event, friend) => {
     event.preventDefault();
     console.log("hi", friend);
+    console.log();
+    setPos([event.clientX, event.clientY]);
+    setVisible(true);
   };
 
   //imediately invoked function
@@ -45,103 +53,74 @@ const FriendListItem = (props) => {
                 : "friendItem active"
             }
             onClick={() => props.selectFriend(friend.userName)}
+            onContextMenu={(event) => handleContextMenu(event, friend.userName)}
           >
-            <div
-              style={{
-                backgroundImage: `url(${
-                  friend.profilePic
-                    ? friend.profilePic.url
-                    : process.env.PUBLIC_URL + "/defaultUserIcon.png"
-                })`,
-              }}
-              className="profilePic small"
-            />
-            <div className="friendInfo">
-              <span className="userName-big">{friend.userName}</span>
-              <span>{friend.smallInfo}</span>
-            </div>
-            <div
-              className="crossBtn"
-              onClick={(event) => {
-                event.stopPropagation();
-                removeFriend(self_userName, friend.userName, socket);
-              }}
+            <ContextMenu />
+            <MiniProfilePic friend={friend} />
+            <UserInfoText
+              userName={friend.userName}
+              smallInfo={friend.smallInfo}
             />
           </div>
         );
-
+      //offline friend
+      case "InActiveFriend":
+        return (
+          <div className="friendItem inactive">
+            <MiniProfilePic friend={friend} />
+            <div className="friendInfo">
+              <span className="userName-big">{friend.userName}</span>
+              {friend.smallInfo}
+            </div>
+          </div>
+        );
       //this is a fallthrough cause for now i dont need the InActiveReq format
       //offline friend request
-      case "InActiveFriend":
+      case "InActiveRequest":
       //online request
       case "ActiveRequest":
         return (
           <div
-            className={
-              props.selectedFriend === friend.userName
-                ? "friendItem active selected"
-                : "friendItem active"
-            }
+            className="friendItem inactive"
             onContextMenu={(event) => handleContextMenu(event, friend.userName)}
           >
-            <div
-              style={{
-                backgroundImage: `url(${
-                  friend.profilePic
-                    ? friend.profilePic.url
-                    : process.env.PUBLIC_URL + "/defaultUserIcon.png"
-                })`,
-              }}
-              className="profilePic small"
+            <MiniProfilePic friend={friend} />
+            <UserInfoText
+              userName={friend.userName}
+              smallInfo={friend.smallInfo}
             />
-            <div className="friendInfo">
-              <span className="userName-big">{friend.userName}</span>
-              <div className="BtnContainer">
-                <div
-                  className="addBtn"
-                  onClick={() =>
-                    respondRequest(self_userName, friend.userName, true, socket)
-                  }
-                />
-                <div
-                  className="crossBtn"
-                  onClick={() =>
-                    respondRequest(
-                      self_userName,
-                      friend.userName,
-                      false,
-                      socket
-                    )
-                  }
-                />
-              </div>
-              <span>{friend.smallInfo}</span>
+            <div className="BtnContainer">
+              <div
+                className="addBtn"
+                onClick={() =>
+                  respondRequest(self_userName, friend.userName, true, socket)
+                }
+              />
+              <div
+                className="crossBtn"
+                onClick={() =>
+                  respondRequest(self_userName, friend.userName, false, socket)
+                }
+              />
             </div>
           </div>
         );
-      //request offilne
-      case "InActiveRequest":
+      case "PendingApproval":
         return (
-          <div
-            className={
-              props.selectedFriend === friend.userName
-                ? "friendItem active selected"
-                : "friendItem active"
-            }
-          >
-            <div
-              style={{
-                backgroundImage: `url(${
-                  friend.profilePic
-                    ? friend.profilePic.url
-                    : process.env.PUBLIC_URL + "/defaultUserIcon.png"
-                })`,
-              }}
-              className="profilePic small"
+          <div className="friendItem inactive">
+            <MiniProfilePic friend={friend} />
+            <UserInfoText
+              userName={friend.userName}
+              smallInfo="Pending Approval"
             />
-            <div className="friendInfo">
-              <span className="userName-big">{friend.userName}</span>
-              <span>{friend.smallInfo}</span>
+            <div className="BtnContainer">
+              <div
+                className="crossBtn"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  cancelRequest(self_userName, friend.userName, socket);
+                }}
+              />
             </div>
           </div>
         );
@@ -157,8 +136,33 @@ const mapStateToProps = (state) => ({
   socket: state.socketData.socket,
 });
 
+const UserInfoText = ({ userName, smallInfo }) => {
+  return (
+    <div className="friendInfo">
+      <span className="userName-big">{userName}</span>
+      <span>{smallInfo}</span>
+    </div>
+  );
+};
+
+const MiniProfilePic = ({ friend }) => {
+  const DEFAULT_IMAGE = process.env.PUBLIC_URL + "/defaultUserIcon.svg";
+
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${
+          friend.profilePic ? friend.profilePic.url : DEFAULT_IMAGE
+        })`,
+      }}
+      className="profilePic small"
+    />
+  );
+};
+
 export default connect(mapStateToProps, {
   selectFriend,
   respondRequest,
   removeFriend,
+  cancelRequest,
 })(FriendListItem);
