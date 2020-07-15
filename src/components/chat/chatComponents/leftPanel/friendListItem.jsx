@@ -68,10 +68,10 @@ const FriendListItem = (props) => {
         return (
           <div className="friendItem inactive">
             <MiniProfilePic friend={friend} />
-            <div className="friendInfo">
-              <span className="userName-big">{friend.userName}</span>
-              {friend.smallInfo}
-            </div>
+            <UserInfoText
+              userName={friend.userName}
+              smallInfo={friend.smallInfo}
+            />
           </div>
         );
       //this is a fallthrough cause for now i dont need the InActiveReq format
@@ -118,7 +118,7 @@ const FriendListItem = (props) => {
                 className="crossBtn"
                 onClick={(event) => {
                   event.stopPropagation();
-                  cancelRequest(self_userName, friend.userName, socket);
+                  props.cancelRequest(self_userName, friend.userName, socket);
                 }}
               />
             </div>
@@ -152,7 +152,9 @@ const MiniProfilePic = ({ friend }) => {
     <div
       style={{
         backgroundImage: `url(${
-          friend.profilePic ? friend.profilePic.url : DEFAULT_IMAGE
+          friend.profilePic && friend.profilePic.url
+            ? friend.profilePic.url
+            : DEFAULT_IMAGE
         })`,
       }}
       className="profilePic small"

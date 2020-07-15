@@ -286,7 +286,7 @@ export const updateUserDetails = (socket) => (dispatch) => {
       //we recieved updated data
       dispatch({
         type: USERDATA_UPDATE_SUCESS,
-        userDataLoading: false,
+
         payload: res.userDetails,
       });
       getFriendInfo(socket);
@@ -296,8 +296,59 @@ export const updateUserDetails = (socket) => (dispatch) => {
       // no user found on this pc
       dispatch({
         type: USERDATA_UPDATE_FAIL,
-        userDataLoading: false,
+
         payload: err.message,
       });
     });
+};
+
+//this method updates all user related data
+export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
+  dispatch({
+    type: FIREND_RES_REQUEST,
+  });
+  let responseOK;
+  fetch(`${SERVER_URL}/users/userDetails`, {
+    method: "PATCH",
+    headers,
+    credentials: "include",
+    body: JSON.stringify({
+      cancel_approval: [friendName],
+    }),
+  })
+    .then((res) => {
+      //to check if response is ok
+      responseOK = res.ok;
+      return res.json();
+    })
+    .then((jsonRes) => {
+      //check if response is ok
+      if (!responseOK) {
+        //server will send error in res.message
+        throw Error(jsonRes.message);
+      }
+      return jsonRes;
+    })
+    .then((authDetails) => {
+      socket.emit("UPDATE_USER_DETAIL", {
+        sender: userName,
+        receiver: friendName,
+      });
+      dispatch({
+        type: FIREND_RES_SUCESS,
+      });
+      //update details
+      dispatch({
+        type: USERDATA_UPDATE_SUCESS,
+        payload: authDetails.updatedUserDetails,
+      });
+      //cal the reload friends
+      //there is obvio a better way
+      getFriendInfo(socket);
+    })
+    .catch((err) =>
+      dispatch({
+        type: FIREND_RES_FAIL,
+      })
+    );
 };
