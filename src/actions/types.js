@@ -70,14 +70,12 @@ export const USERDATA_UPDATE_FAIL = "USERDATA_UPDATE_FAIL";
 export const SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:5000"
-    : "https://mvldkdknv.herokuapp.com";
-
+    : "https://kite-chat-server.herokuapp.com";
 export const CLIENT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://mvldkdknv.herokuapp.com";
-
+    : "https://kite-chat.herokuapp.com";
 export const CHAT_SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2500"
-    : "https://mvldkdknv.herokuapp.com";
+    : "https://kite-chat-chatserver.herokuapp.com";
