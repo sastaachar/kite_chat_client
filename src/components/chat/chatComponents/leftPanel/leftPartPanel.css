@@ -135,7 +135,7 @@ select {
 
 .inactive .profilePic,
 .inactive .friendInfo {
-  opacity: 50%;
+  opacity: 0.2;
 }
 
 .friendInfo {
