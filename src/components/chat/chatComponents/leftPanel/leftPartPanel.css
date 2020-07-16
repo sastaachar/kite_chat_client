@@ -1,233 +1,227 @@
 .chatLeftPanel {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 24.67vw;
-    background-color: #19183f;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 24.67vw;
+  background-color: #19183f;
 }
-
 
 /* User info start */
 
 .userName-big::before {
-    content: "@";
-    color: #faff0a;
+  content: "@";
+  color: #faff0a;
 }
 
 .profilePic {
-    width: 130px;
-    height: 130px;
-    box-sizing: border-box;
-    border-radius: 50%;
-    background-size: cover;
-    border: 3px solid var(--light);
+  width: 130px;
+  height: 130px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-size: cover;
+  border: 3px solid var(--light);
 }
 
 .profilePic:hover {
-    border: 3px solid #faff0a;
+  border: 3px solid #faff0a;
 }
 
 .userInfo {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* for vertical alignment */
-    align-items: center;
-    border-bottom: 2px solid var(--light);
-    padding: 20px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* for vertical alignment */
+  align-items: center;
+  border-bottom: 2px solid var(--light);
+  padding: 20px 0px;
 }
 
 .userName-container {
-    color: #faff0a;
-    margin: 0px 30px;
-    /* for ... in overflow */
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  color: #faff0a;
+  margin: 0px 30px;
+  /* for ... in overflow */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .userName-big {
-    color: white;
-    font-size: 1.5rem;
+  color: white;
+  font-size: 1.5rem;
 }
 
 .userinfo-small {
-    color: #f3f3f3;
-    font-size: 0.7rem;
+  color: #f3f3f3;
+  font-size: 0.7rem;
 }
 
-
 /* User info end */
-
 
 /* friend options info start */
 
 .friendOptions {
-    border-bottom: 2px solid var(--light);
-    text-align: center;
+  border-bottom: 2px solid var(--light);
+  text-align: center;
 }
 
 .addFriend {
-    margin: 10px;
-    box-sizing: border-box;
-    font-size: 24px;
-    text-align: center;
+  margin: 10px;
+  box-sizing: border-box;
+  font-size: 24px;
+  text-align: center;
 }
 
 .addFrnd-input-container {
-    position: relative;
-    right: 10px;
-    display: inline;
+  position: relative;
+  right: 10px;
+  display: inline;
 }
 
 .addFrnd-input-container::before {
-    content: "@  ";
-    color: #faff0a;
+  content: "@  ";
+  color: #faff0a;
 }
 
 .addFrnd-input-container input {
-    max-width: 11vw;
-    padding: 0px 10px;
-    min-height: 3.8vh;
-    border-radius: 40px;
-    border: none;
-    outline: none;
+  max-width: 11vw;
+  padding: 0px 10px;
+  min-height: 3.8vh;
+  border-radius: 40px;
+  border: none;
+  outline: none;
 }
 
 .addFrnd-input-container input[type="text"] {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .addFriend .addBtn {
-    display: inline-block;
-    position: relative;
-    top: 0.41vh;
-    left: 1vw;
-    color: var(--light);
+  display: inline-block;
+  position: relative;
+  top: 0.41vh;
+  left: 1vw;
+  color: var(--light);
 }
 
 select {
-    position: relative;
-    right: 5px;
-    font-family: Scope One;
-    border-radius: 35px;
-    padding-left: 5px;
-    padding-top: 2px;
-    outline: none;
-    margin-bottom: 10px;
+  position: relative;
+  right: 5px;
+  font-family: Scope One;
+  border-radius: 35px;
+  padding-left: 5px;
+  padding-top: 2px;
+  outline: none;
+  margin-bottom: 10px;
 }
-
 
 /* Friends list */
 
 .friendsList {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .friendItem {
-    box-sizing: border-box;
-    position: relative;
-    width: 100%;
-    height: 70px;
-    border-style: solid;
-    border-color: rgba(0, 224, 185, 0.1);
-    border-width: 2px 0px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 70px;
+  border-style: solid;
+  border-color: rgba(0, 224, 185, 0.1);
+  border-width: 2px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .inactive .profilePic,
 .inactive .friendInfo {
-    opacity: 20%;
+  opacity: 50%;
 }
 
 .friendInfo {
-    display: flex;
-    color: white;
-    font-size: 12px;
-    flex-direction: column;
-    margin-left: 5px;
+  display: flex;
+  color: white;
+  font-size: 12px;
+  flex-direction: column;
+  margin-left: 5px;
 }
 
 .active:hover {
-    background-color: #151433;
+  background-color: #151433;
 }
 
 .selected {
-    background-color: #151433;
-    border-left: 3px solid var(--light);
+  background-color: #151433;
+  border-left: 3px solid var(--light);
 }
 
 .small {
-    margin: 8px;
-    width: 50px;
-    height: 50px;
-    border-width: 2px;
+  margin: 8px;
+  width: 50px;
+  height: 50px;
+  border-width: 2px;
 }
 
 .small:hover {
-    border-width: 2px;
+  border-width: 2px;
 }
 
-
 /* btns */
-
 
 /* add , cross , cancel */
 
 .BtnContainer {
-    overflow: hidden;
-    position: absolute;
-    right: 5px;
-    display: flex;
-    margin: 0px 1vw;
+  overflow: hidden;
+  position: absolute;
+  right: 5px;
+  display: flex;
+  margin: 0px 1vw;
 }
 
 .addBtn {
-    background-image: url("../../../misc/svgs/addSign.svg");
-    height: 17px;
-    width: 17px;
+  background-image: url("../../../misc/svgs/addSign.svg");
+  height: 17px;
+  width: 17px;
 }
 
 .crossBtn {
-    background-image: url("../../../misc/svgs/crossSign.svg");
-    height: 18px;
-    width: 18px;
-    transform: rotate(45deg);
+  background-image: url("../../../misc/svgs/crossSign.svg");
+  height: 18px;
+  width: 18px;
+  transform: rotate(45deg);
 }
 
 .reloadBtn {
-    background-image: url("../../../misc/svgs/reloadBtn.svg");
-    height: 22px;
-    width: 22px;
+  background-image: url("../../../misc/svgs/reloadBtn.svg");
+  height: 22px;
+  width: 22px;
 }
 
 .addBtn,
 .crossBtn,
 .reloadBtn {
-    margin-right: 10px;
-    display: inline-block;
-    background-position: center;
-    background-size: cover;
-    cursor: pointer;
+  margin-right: 10px;
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
 }
 
 .spin {
-    animation: rotate 3s linear infinite;
+  animation: rotate 3s linear infinite;
 }
 
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .addBtn:active,
 .reloadBtn:active,
 .crossBtn:active {
-    transform: rotate(20deg);
+  transform: rotate(20deg);
 }
