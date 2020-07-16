@@ -17,6 +17,12 @@ import {
   USERDATA_UPDATE_REQUEST,
   USERDATA_UPDATE_SUCESS,
   USERDATA_UPDATE_FAIL,
+  FIREND_RMV_REQUEST,
+  FIREND_RMV_SUCESS,
+  FIREND_RMV_FAIL,
+  FIREND_CNCL_REQ_FAIL,
+  FIREND_CNCL_REQ_REQUEST,
+  FIREND_CNCL_REQ_SUCESS,
 } from "./types";
 
 import store from "../store";
@@ -113,13 +119,13 @@ export const sendRequest = (userName, friendName, socket) => (dispatch) => {
   })
     .then((res) => {
       //to check if response is ok
-      console.log(res);
+
       responseOK = res.ok;
       return res.json();
     })
     .then((jsonRes) => {
       //check if response is ok
-      console.log(jsonRes);
+
       if (!responseOK) {
         //server will send error in res.message
         throw Error(jsonRes.message);
@@ -127,20 +133,20 @@ export const sendRequest = (userName, friendName, socket) => (dispatch) => {
       return jsonRes;
     })
     .then((authDetails) => {
+      dispatch({
+        type: FIREND_REQ_SUCESS,
+      });
       socket.emit("UPDATE_USER_DETAIL", {
         sender: userName,
         receiver: friendName,
       });
-      dispatch({
-        type: FIREND_REQ_SUCESS,
-      });
+
       //update details
       dispatch({
         type: USERDATA_UPDATE_SUCESS,
         payload: authDetails.updatedUserDetails,
       });
-      //cal the reload friends
-      //there is obvio a better way
+
       store.dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
@@ -204,9 +210,9 @@ export const respondRequest = (userName, friendName, accepted, socket) => (
 
 export const removeFriend = (userName, friendName, socket) => (dispatch) => {
   dispatch({
-    type: FIREND_RES_REQUEST,
+    type: FIREND_RMV_REQUEST,
   });
-  console.log("remove");
+
   let responseOK;
   fetch(`${SERVER_URL}/users/userDetails`, {
     method: "PATCH",
@@ -235,7 +241,7 @@ export const removeFriend = (userName, friendName, socket) => (dispatch) => {
         receiver: friendName,
       });
       dispatch({
-        type: FIREND_RES_SUCESS,
+        type: FIREND_RMV_SUCESS,
       });
       //update details
       dispatch({
@@ -248,7 +254,7 @@ export const removeFriend = (userName, friendName, socket) => (dispatch) => {
     })
     .catch((err) =>
       dispatch({
-        type: FIREND_RES_FAIL,
+        type: FIREND_RMV_FAIL,
       })
     );
 };
@@ -259,7 +265,7 @@ export const updateUserDetails = (socket) => (dispatch) => {
   dispatch({
     type: USERDATA_UPDATE_REQUEST,
   });
-  console.log("caleldav");
+
   let headers = new Headers();
   //no need for these stupid header
   headers.append("Content-Type", "application/json");
@@ -304,7 +310,7 @@ export const updateUserDetails = (socket) => (dispatch) => {
 //this method updates all user related data
 export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
   dispatch({
-    type: FIREND_RES_REQUEST,
+    type: FIREND_CNCL_REQ_REQUEST,
   });
   let responseOK;
   fetch(`${SERVER_URL}/users/userDetails`, {
@@ -334,7 +340,7 @@ export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
         receiver: friendName,
       });
       dispatch({
-        type: FIREND_RES_SUCESS,
+        type: FIREND_CNCL_REQ_SUCESS,
       });
       //update details
       dispatch({
@@ -347,7 +353,7 @@ export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
     })
     .catch((err) =>
       dispatch({
-        type: FIREND_RES_FAIL,
+        type: FIREND_CNCL_REQ_FAIL,
       })
     );
 };

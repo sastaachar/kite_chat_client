@@ -36,11 +36,20 @@ class FriendOptions extends Component {
           <div className="addBtn" onClick={this.handleAddFriend} />
         </div>
         <div className="friendListTypeContainer">
-          <select name="listTypes" id="listType">
-            <option value="pendingReq">Pending Requests</option>
-            <option value="onlineFrnds">Online Friends</option>
-            <option value="offlineFrnds">Offline Friends</option>
-            <option value="allFrnds">All Friends</option>
+          <select
+            name="listTypes"
+            id="listType"
+            onChange={(e) => {
+              this.props.setListType(e.target.value);
+            }}
+            defaultValue={"onlineFriends"}
+          >
+            <option value="onlineFriends">Online Friends</option>
+            <option value="offlineFriends">Offline Friends</option>
+            <option value="pendingRequests">Pending Requests</option>
+            <option value="pendingApprovals">Pending Approvals</option>
+            <option value="blockedFriends">Blocked</option>
+            <option value="allFriends">All</option>
           </select>
           <div
             className={this.props.loading ? "reloadBtn spin" : "reloadBtn "}

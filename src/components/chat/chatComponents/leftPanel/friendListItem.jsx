@@ -29,14 +29,12 @@ const FriendListItem = (props) => {
     removeFriend,
   } = props;
 
-  const [pos, setPos] = useState([0, 0]);
+  const [pos, setPos] = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
 
   const handleContextMenu = (event, friend) => {
     event.preventDefault();
-    console.log("hi", friend);
-    console.log();
-    setPos([event.clientX, event.clientY]);
+    setPos({ x: event.clientX, y: event.clientY });
     setVisible(true);
   };
 
@@ -55,20 +53,30 @@ const FriendListItem = (props) => {
             onClick={() => props.selectFriend(friend.userName)}
             onContextMenu={(event) => handleContextMenu(event, friend.userName)}
           >
-            <ContextMenu />
+            <ContextMenu
+              visible={visible}
+              pos={pos}
+              setVisible={setVisible}
+              menuItems={[
+                {
+                  name: "Unfriend",
+                  callBack: () => {
+                    removeFriend(self_userName, friend.userName, socket);
+                  },
+                },
+                {
+                  name: "Block",
+                  callBack: () => {
+                    console.log("blocked", friend.userName);
+                  },
+                },
+              ]}
+            />
             <MiniProfilePic friend={friend} />
             <UserInfoText
               userName={friend.userName}
               smallInfo={friend.smallInfo}
             />
-            <div className="BtnContainer">
-              <div
-                className="crossBtn"
-                onClick={() =>
-                  removeFriend(self_userName, friend.userName, socket)
-                }
-              />
-            </div>
           </div>
         );
       //offline friend
@@ -88,10 +96,7 @@ const FriendListItem = (props) => {
       //online request
       case "ActiveRequest":
         return (
-          <div
-            className="friendItem inactive"
-            onContextMenu={(event) => handleContextMenu(event, friend.userName)}
-          >
+          <div className="friendItem inactive">
             <MiniProfilePic friend={friend} />
             <UserInfoText
               userName={friend.userName}
@@ -100,15 +105,17 @@ const FriendListItem = (props) => {
             <div className="BtnContainer">
               <div
                 className="addBtn"
-                onClick={() =>
-                  respondRequest(self_userName, friend.userName, true, socket)
-                }
+                onClick={(event) => {
+                  event.stopPropagation();
+                  respondRequest(self_userName, friend.userName, true, socket);
+                }}
               />
               <div
                 className="crossBtn"
-                onClick={() =>
-                  respondRequest(self_userName, friend.userName, false, socket)
-                }
+                onClick={(event) => {
+                  event.stopPropagation();
+                  respondRequest(self_userName, friend.userName, false, socket);
+                }}
               />
             </div>
           </div>

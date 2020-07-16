@@ -1,7 +1,9 @@
 :root {
     --light: #00e0b9;
     --dark: #22215b;
+    --darker: #19183F;
     --light-dark: #b563ff;
+    --smooth-red: #FF4654;
 }
 
 div::-webkit-scrollbar-track {

@@ -14,7 +14,14 @@ import {
 import "./leftPartPanel.css";
 
 class LeftPanel extends Component {
-  state = {};
+  state = {
+    listType: "onlineFriends",
+  };
+
+  setListType = (listType) => {
+    this.setState({ listType });
+  };
+
   componentDidMount() {
     //get list of friends
     this.props.getFriendInfo(this.props.socket);
@@ -34,15 +41,18 @@ class LeftPanel extends Component {
       pending_approvals,
     } = this.props.userDetails;
 
-    console.log(allFriends);
+    const { listType } = this.state;
 
     return (
       <div className="chatLeftPanel">
         <UserInfo />
-        <FriendOptions />
+        <FriendOptions setListType={this.setListType} />
         <div className="friendsList">
           {allFriends.map((friend) => {
-            if (block_list.includes(friend.userName)) {
+            if (
+              block_list.includes(friend.userName) &&
+              (listType === "allFriends" || listType === "blockedFriends")
+            ) {
               //blocked friend
               return (
                 <FriendListItem
@@ -51,7 +61,10 @@ class LeftPanel extends Component {
                   key={friend.userName}
                 />
               );
-            } else if (pending_approvals.includes(friend.userName)) {
+            } else if (
+              pending_approvals.includes(friend.userName) &&
+              (listType === "allFriends" || listType === "pendingApprovals")
+            ) {
               //pending approvals
               return (
                 <FriendListItem
@@ -60,7 +73,10 @@ class LeftPanel extends Component {
                   key={friend.userName}
                 />
               );
-            } else if (pending_requests.includes(friend.userName)) {
+            } else if (
+              pending_requests.includes(friend.userName) &&
+              (listType === "allFriends" || listType === "pendingRequests")
+            ) {
               //pending requests active and inactive
               return onlineFriends.includes(friend.userName) ? (
                 <FriendListItem
@@ -75,15 +91,25 @@ class LeftPanel extends Component {
                   key={friend.userName}
                 />
               );
-            } else if (friends_list.includes(friend.userName)) {
+            } else if (
+              friends_list.includes(friend.userName) &&
+              onlineFriends.includes(friend.userName) &&
+              (listType === "allFriends" || listType === "onlineFriends")
+            ) {
               //friends active and inactive
-              return onlineFriends.includes(friend.userName) ? (
+              return (
                 <FriendListItem
                   friend={friend}
                   type="ActiveFriend"
                   key={friend.userName}
                 />
-              ) : (
+              );
+            } else if (
+              friends_list.includes(friend.userName) &&
+              !onlineFriends.includes(friend.userName) &&
+              (listType === "allFriends" || listType === "offlineFriends")
+            ) {
+              return (
                 <FriendListItem
                   friend={friend}
                   type="InActiveFriend"
