@@ -63,7 +63,7 @@ class LoginMain extends Component {
                 <label htmlFor="password">Password</label>
                 <br />
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   name="formPassword"
                   onChange={this.handleFormChange}

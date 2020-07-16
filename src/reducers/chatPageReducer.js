@@ -1,7 +1,7 @@
 import {
-  FRIENDINFO_REQUEST,
-  FRIENDINFO_FAIL,
-  FRIENDINFO_SUCESS,
+  FRIENDS_INFO_REQUEST,
+  FRIENDS_INFO_SUCESS,
+  FRIENDS_INFO_FAIL,
   FIREND_DISCONNECTED,
   FIREND_CONNECTED,
   FIREND_SELECTED,
@@ -20,18 +20,18 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case FRIENDINFO_REQUEST:
+    case FRIENDS_INFO_REQUEST:
       return {
         ...state,
         friendListWait: true,
       };
-    case FRIENDINFO_FAIL:
+    case FRIENDS_INFO_FAIL:
       return {
         ...state,
         friendListWait: false,
         error: action.error,
       };
-    case FRIENDINFO_SUCESS:
+    case FRIENDS_INFO_SUCESS:
       return {
         ...state,
         friendListWait: false,

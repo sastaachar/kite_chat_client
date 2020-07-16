@@ -1,7 +1,7 @@
 import {
-  FRIENDINFO_REQUEST,
-  FRIENDINFO_SUCESS,
-  FRIENDINFO_FAIL,
+  FRIENDS_INFO_REQUEST,
+  FRIENDS_INFO_SUCESS,
+  FRIENDS_INFO_FAIL,
   SERVER_URL,
   CLIENT_URL,
   FIREND_DISCONNECTED,
@@ -19,15 +19,16 @@ import {
   USERDATA_UPDATE_FAIL,
 } from "./types";
 
+import store from "../store";
+
 let headers = new Headers();
-//no need for these stupid header
 headers.append("Content-Type", "application/json");
 headers.append("Origin", CLIENT_URL);
 headers.append("Access-Control-Allow-Credentials", "true");
 
 export const getFriendInfo = (socket) => (dispatch) => {
   dispatch({
-    type: FRIENDINFO_REQUEST,
+    type: FRIENDS_INFO_REQUEST,
   });
   let responseOK;
 
@@ -56,7 +57,7 @@ export const getFriendInfo = (socket) => (dispatch) => {
         allFriends.map((friend) => friend.userName),
         ({ onlineFriends }) => {
           dispatch({
-            type: FRIENDINFO_SUCESS,
+            type: FRIENDS_INFO_SUCESS,
             payload: { allFriends, onlineFriends },
           });
         }
@@ -64,7 +65,7 @@ export const getFriendInfo = (socket) => (dispatch) => {
     })
     .catch((err) => {
       dispatch({
-        type: FRIENDINFO_FAIL,
+        type: FRIENDS_INFO_FAIL,
         error: err.message,
       });
     });
@@ -112,11 +113,13 @@ export const sendRequest = (userName, friendName, socket) => (dispatch) => {
   })
     .then((res) => {
       //to check if response is ok
+      console.log(res);
       responseOK = res.ok;
       return res.json();
     })
     .then((jsonRes) => {
       //check if response is ok
+      console.log(jsonRes);
       if (!responseOK) {
         //server will send error in res.message
         throw Error(jsonRes.message);
@@ -138,7 +141,7 @@ export const sendRequest = (userName, friendName, socket) => (dispatch) => {
       });
       //cal the reload friends
       //there is obvio a better way
-      getFriendInfo(socket);
+      store.dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
       dispatch({
@@ -190,7 +193,7 @@ export const respondRequest = (userName, friendName, accepted, socket) => (
       });
       //cal the reload friends
       //there is obvio a better way
-      getFriendInfo(socket);
+      store.dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
       dispatch({
@@ -241,7 +244,7 @@ export const removeFriend = (userName, friendName, socket) => (dispatch) => {
       });
       //cal the reload friends
       //there is obvio a better way
-      getFriendInfo(socket);
+      store.dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
       dispatch({
@@ -283,20 +286,16 @@ export const updateUserDetails = (socket) => (dispatch) => {
       return jsonRes;
     })
     .then((res) => {
-      //we recieved updated data
       dispatch({
         type: USERDATA_UPDATE_SUCESS,
 
         payload: res.userDetails,
       });
-      getFriendInfo(socket);
+      store.dispatch(getFriendInfo(socket));
     })
     .catch((err) => {
-      //the preCheck failed
-      // no user found on this pc
       dispatch({
         type: USERDATA_UPDATE_FAIL,
-
         payload: err.message,
       });
     });
@@ -344,7 +343,7 @@ export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
       });
       //cal the reload friends
       //there is obvio a better way
-      getFriendInfo(socket);
+      store.dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
       dispatch({

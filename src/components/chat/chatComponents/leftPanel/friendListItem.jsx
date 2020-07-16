@@ -61,6 +61,14 @@ const FriendListItem = (props) => {
               userName={friend.userName}
               smallInfo={friend.smallInfo}
             />
+            <div className="BtnContainer">
+              <div
+                className="crossBtn"
+                onClick={() =>
+                  removeFriend(self_userName, friend.userName, socket)
+                }
+              />
+            </div>
           </div>
         );
       //offline friend

@@ -23,9 +23,9 @@ export const SOCKETCON_SUCESS = "SOCKETCON_SUCESS";
 export const SOCKETCON_FAIL = "SOCKETCON_FAIL";
 
 // get friend info from server request
-export const FRIENDINFO_REQUEST = "FRIENDINFO_REQUEST";
-export const FRIENDINFO_SUCESS = "FRIENDINFO_SUCESS";
-export const FRIENDINFO_FAIL = "FRIENDINFO_FAIL";
+export const FRIENDS_INFO_REQUEST = "FRIENDINFO_REQUEST";
+export const FRIENDS_INFO_SUCESS = "FRIENDINFO_SUCESS";
+export const FRIENDS_INFO_FAIL = "FRIENDINFO_FAIL";
 
 // friend came online
 export const FIREND_CONNECTED = "FIREND_CONNECTED";
