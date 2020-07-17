@@ -20,9 +20,9 @@ const RightPanel = (props) => {
             className="profilePic picBig"
             style={{
               backgroundImage: `url(${
-                user.profilePic
+                user.profilePic && user.profilePic.url
                   ? user.profilePic.url
-                  : process.env.PUBLIC_URL + "/defaultUserIcon.png"
+                  : process.env.PUBLIC_URL + "/defaultUserIcon.svg"
               })`,
             }}
           />
