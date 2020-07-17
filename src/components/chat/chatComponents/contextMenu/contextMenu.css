@@ -7,11 +7,11 @@
     background-color: var(--darker);
     height: 100px;
     width: 100px;
-    border-radius: 15px;
+    border-radius: 13px;
     box-shadow: -2px -2px 9px rgba(90, 90, 90, 10), 6px 6px 9px rgba(0, 0, 0, 100);
     z-index: 1;
     transform-origin: top left;
-    animation: popUp 0.2s ease-in;
+    animation: popUp 0.1s ease-in;
 }
 
 .contextMenu span {
