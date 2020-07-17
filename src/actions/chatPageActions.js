@@ -27,6 +27,7 @@ import {
 
 import store from "../store";
 
+// same header used in all functions (need refactoring)
 let headers = new Headers();
 headers.append("Content-Type", "application/json");
 headers.append("Origin", CLIENT_URL);
@@ -106,173 +107,13 @@ export const sendMessage = (message, socket) => (dispatch) => {
   });
 };
 
-export const sendRequest = (userName, friendName, socket) => (dispatch) => {
-  dispatch({
-    type: FIREND_REQ_REQUEST,
-  });
-  let responseOK;
-  fetch(`${SERVER_URL}/users/userDetails`, {
-    method: "PATCH",
-    headers,
-    credentials: "include",
-    body: JSON.stringify({ add_friend: friendName }),
-  })
-    .then((res) => {
-      //to check if response is ok
-
-      responseOK = res.ok;
-      return res.json();
-    })
-    .then((jsonRes) => {
-      //check if response is ok
-
-      if (!responseOK) {
-        //server will send error in res.message
-        throw Error(jsonRes.message);
-      }
-      return jsonRes;
-    })
-    .then((authDetails) => {
-      dispatch({
-        type: FIREND_REQ_SUCESS,
-      });
-      socket.emit("UPDATE_USER_DETAIL", {
-        sender: userName,
-        receiver: friendName,
-      });
-
-      //update details
-      dispatch({
-        type: USERDATA_UPDATE_SUCESS,
-        payload: authDetails.updatedUserDetails,
-      });
-
-      store.dispatch(getFriendInfo(socket));
-    })
-    .catch((err) =>
-      dispatch({
-        type: FIREND_REQ_FAIL,
-      })
-    );
-};
-
-export const respondRequest = (userName, friendName, accepted, socket) => (
-  dispatch
-) => {
-  dispatch({
-    type: FIREND_RES_REQUEST,
-  });
-  let responseOK;
-  fetch(`${SERVER_URL}/users/userDetails`, {
-    method: "PATCH",
-    headers,
-    credentials: "include",
-    body: JSON.stringify({
-      requests_response: [{ userName: friendName, accepted }],
-    }),
-  })
-    .then((res) => {
-      //to check if response is ok
-      responseOK = res.ok;
-      return res.json();
-    })
-    .then((jsonRes) => {
-      //check if response is ok
-      if (!responseOK) {
-        //server will send error in res.message
-        throw Error(jsonRes.message);
-      }
-      return jsonRes;
-    })
-    .then((authDetails) => {
-      socket.emit("UPDATE_USER_DETAIL", {
-        sender: userName,
-        receiver: friendName,
-      });
-      dispatch({
-        type: FIREND_RES_SUCESS,
-      });
-      //update details
-      dispatch({
-        type: USERDATA_UPDATE_SUCESS,
-        payload: authDetails.updatedUserDetails,
-      });
-      //cal the reload friends
-      //there is obvio a better way
-      store.dispatch(getFriendInfo(socket));
-    })
-    .catch((err) =>
-      dispatch({
-        type: FIREND_RES_FAIL,
-      })
-    );
-};
-
-export const removeFriend = (userName, friendName, socket) => (dispatch) => {
-  dispatch({
-    type: FIREND_RMV_REQUEST,
-  });
-
-  let responseOK;
-  fetch(`${SERVER_URL}/users/userDetails`, {
-    method: "PATCH",
-    headers,
-    credentials: "include",
-    body: JSON.stringify({
-      remove_friends: [friendName],
-    }),
-  })
-    .then((res) => {
-      //to check if response is ok
-      responseOK = res.ok;
-      return res.json();
-    })
-    .then((jsonRes) => {
-      //check if response is ok
-      if (!responseOK) {
-        //server will send error in res.message
-        throw Error(jsonRes.message);
-      }
-      return jsonRes;
-    })
-    .then((authDetails) => {
-      socket.emit("UPDATE_USER_DETAIL", {
-        sender: userName,
-        receiver: friendName,
-      });
-      dispatch({
-        type: FIREND_RMV_SUCESS,
-      });
-      //update details
-      dispatch({
-        type: USERDATA_UPDATE_SUCESS,
-        payload: authDetails.updatedUserDetails,
-      });
-      //cal the reload friends
-      //there is obvio a better way
-      store.dispatch(getFriendInfo(socket));
-    })
-    .catch((err) =>
-      dispatch({
-        type: FIREND_RMV_FAIL,
-      })
-    );
-};
-
 //this method updates all user related data
 export const updateUserDetails = (socket) => (dispatch) => {
-  //call the users endpoint then call socket io
+  // call the users endpoint then call socket io
   dispatch({
     type: USERDATA_UPDATE_REQUEST,
   });
-
-  let headers = new Headers();
-  //no need for these stupid header
-  headers.append("Content-Type", "application/json");
-  headers.append("Origin", CLIENT_URL);
-  headers.append("Access-Control-Allow-Credentials", "true");
-
-  //make new funtion out of this called getuser call it here and in the chatPageactions
+  // make new funtion out of this called getuser call it here and in the chatPageactions
   let responseOK;
   fetch(`${SERVER_URL}/users`, {
     headers,
@@ -307,19 +148,23 @@ export const updateUserDetails = (socket) => (dispatch) => {
     });
 };
 
-//this method updates all user related data
-export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
+// this function will do all the dispatch and fetch
+const UserDataUpdateOperation = (
+  { reqType, sucessType, failType },
+  body,
+  { sender, receiver },
+  socket,
+  dispatch
+) => {
   dispatch({
-    type: FIREND_CNCL_REQ_REQUEST,
+    type: reqType,
   });
   let responseOK;
   fetch(`${SERVER_URL}/users/userDetails`, {
     method: "PATCH",
     headers,
     credentials: "include",
-    body: JSON.stringify({
-      cancel_approval: [friendName],
-    }),
+    body: JSON.stringify(body),
   })
     .then((res) => {
       //to check if response is ok
@@ -336,11 +181,11 @@ export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
     })
     .then((authDetails) => {
       socket.emit("UPDATE_USER_DETAIL", {
-        sender: userName,
-        receiver: friendName,
+        sender,
+        receiver,
       });
       dispatch({
-        type: FIREND_CNCL_REQ_SUCESS,
+        type: sucessType,
       });
       //update details
       dispatch({
@@ -349,11 +194,91 @@ export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
       });
       //cal the reload friends
       //there is obvio a better way
-      store.dispatch(getFriendInfo(socket));
+      dispatch(getFriendInfo(socket));
     })
     .catch((err) =>
       dispatch({
-        type: FIREND_CNCL_REQ_FAIL,
+        type: failType,
       })
     );
+};
+
+// send request
+export const sendRequest = (userName, friendName, socket) => (dispatch) => {
+  UserDataUpdateOperation(
+    {
+      reqType: FIREND_REQ_REQUEST,
+      sucessType: FIREND_REQ_SUCESS,
+      failType: FIREND_REQ_FAIL,
+    },
+    { add_friend: friendName },
+    {
+      sender: userName,
+      receiver: friendName,
+    },
+    socket,
+    dispatch
+  );
+};
+
+// respond to a friend request
+export const respondRequest = (userName, friendName, accepted, socket) => (
+  dispatch
+) => {
+  UserDataUpdateOperation(
+    {
+      reqType: FIREND_RES_REQUEST,
+      sucessType: FIREND_RES_SUCESS,
+      failType: FIREND_RES_FAIL,
+    },
+    {
+      requests_response: [{ userName: friendName, accepted }],
+    },
+    {
+      sender: userName,
+      receiver: friendName,
+    },
+    socket,
+    dispatch
+  );
+};
+
+// unfriend operation
+export const removeFriend = (userName, friendName, socket) => (dispatch) => {
+  UserDataUpdateOperation(
+    {
+      reqType: FIREND_RMV_REQUEST,
+      sucessType: FIREND_RMV_SUCESS,
+      failType: FIREND_RMV_FAIL,
+    },
+    {
+      remove_friends: [friendName],
+    },
+    {
+      sender: userName,
+      receiver: friendName,
+    },
+    socket,
+    dispatch
+  );
+};
+
+// cancel approval from friend
+export const cancelRequest = (userName, friendName, socket) => (dispatch) => {
+  UserDataUpdateOperation(
+    {
+      reqType: FIREND_CNCL_REQ_REQUEST,
+      sucessType: FIREND_CNCL_REQ_SUCESS,
+      failType: FIREND_CNCL_REQ_FAIL,
+    },
+    {
+      cancel_approval: [friendName],
+    },
+    {
+      sender: userName,
+      receiver: friendName,
+    },
+    socket,
+    dispatch
+  );
 };
