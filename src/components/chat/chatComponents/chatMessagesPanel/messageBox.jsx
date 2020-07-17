@@ -18,7 +18,7 @@ const MessageBox = (props) => {
       <div className="messageBox">
         <span className="message-text">{content.text}</span>
         <span className="message-timestamp">
-          {Moment(content.timestamp).format("MMMM Do YYYY, h:mm:ss a")}
+          {Moment(content.timestamp).format("D MMMM , h:m A")}
         </span>
       </div>
     </div>
