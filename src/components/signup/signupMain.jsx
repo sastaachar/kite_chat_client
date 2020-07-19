@@ -43,12 +43,12 @@ class SignupMain extends Component {
   render() {
     return (
       <div className="loginMain">
-        {this.props.signupSucess ? <Redirect to={`/login`} /> : null}
+        {this.props.signupSucess ? "Confirm your email" : null}
         <div className="leftBox">
           {this.props.loading ? <span>loading</span> : null}
           {this.props.signupSucess ? <span>sucess</span> : null}
           <div className="logoPic">
-            <Kite></Kite>
+            <Kite />
           </div>
           <span className="logoName">kite Chat</span>
           <span className="logoTag">stay connected</span>

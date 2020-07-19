@@ -7,15 +7,18 @@ import { connect } from "react-redux";
 class UnauthenticatedRoute extends Component {
   render() {
     const { children, loggedIn, preCheckComplete, ...rest } = this.props;
+
     return (
       <Route {...rest}>
         {preCheckComplete ? (
           !loggedIn ? (
             children
           ) : (
+            // precheck complete and loggedIn
             <Redirect to="/chat" />
           )
         ) : (
+          // this will force preCheck ( / is loadingPage that has preCheck on mount)
           <Redirect to="/" />
         )}
       </Route>

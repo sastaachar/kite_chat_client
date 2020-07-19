@@ -42,7 +42,7 @@ class FriendOptions extends Component {
             onChange={(e) => {
               this.props.setListType(e.target.value);
             }}
-            defaultValue={"onlineFriends"}
+            defaultValue={"allFriends"}
           >
             <option value="onlineFriends">Online Friends</option>
             <option value="offlineFriends">Offline Friends</option>

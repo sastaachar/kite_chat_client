@@ -15,7 +15,7 @@ import "./leftPartPanel.css";
 
 class LeftPanel extends Component {
   state = {
-    listType: "onlineFriends",
+    listType: "allFriends",
   };
 
   setListType = (listType) => {
