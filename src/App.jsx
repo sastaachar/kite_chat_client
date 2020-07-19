@@ -17,6 +17,7 @@ import UnauthenticatedRoute from "./components/misc/unauthenticatedRoute";
 import AuthenticatedRoute from "./components/misc/authenticatedRoute";
 import LoadingPage from "./components/misc/loadingPage";
 import PreCheckRoute from "./components/misc/preCheckRoute";
+import AccountVerification from "./components/misc/accountVerification";
 
 import store from "./store";
 
@@ -59,6 +60,17 @@ class App extends Component {
             <UnauthenticatedRoute path="/signup">
               <SignupMain />
             </UnauthenticatedRoute>
+
+            {/* these two paths i.e verification and reset_password
+                  are speacial paths and can be accessed with restrictions
+              */}
+            <Route path="/account/verification/:token">
+              <AccountVerification />
+            </Route>
+            <Route path="/account/reset_password/:token">
+              <span>password reset</span>
+            </Route>
+
             {
               //only show if logged in
             }
