@@ -39,7 +39,7 @@ class LoginMain extends Component {
 
   formatError = (msg) => {
     if (msg == "Auth Error") return "Incorrect username or password !";
-    else if ((msg = "notVerified!")) return "Please verify your Email !";
+    else if ((msg = "notVerified")) return "Please verify your Email !";
     return null;
   };
 
