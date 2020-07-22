@@ -1,0 +1,24 @@
+<svg width="271" height="185" viewBox="0 0 271 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="kite">
+<g id="tail" filter="url(#filter0_d)">
+<path d="M216.512 69.7166C197.27 71.4495 182.098 74.4679 165.824 79.9676C147.212 86.2574 178.637 91.0792 188.126 93.054C198.432 95.1987 219.159 100.334 202.544 106.031C189.494 110.506 170.727 111.756 155.686 113.883C140.551 116.024 117.525 116.583 104.547 121.19C97.9522 123.531 132.895 130.108 136.087 131.55C147.668 136.783 130.453 143.462 122.795 146.327C109.982 151.12 94.9898 152.736 79.9918 155.269C62.5832 158.209 45.5159 161.357 29.0785 165.411C18.6045 167.994 0.912611 170.488 -4.48828 175.717" stroke="#00E0B9" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Group 4">
+<path id="Polygon 1" d="M237.084 30.6462L223.627 22.0527L249.93 9.19311L237.084 30.6462Z" fill="#00E0B9"/>
+<path id="Polygon 3" d="M235.887 32.4879L220.852 61.0037L223.315 23.0621L235.887 32.4879Z" fill="#00E0B9"/>
+<path id="Polygon 4" d="M238.402 34.3725L222.107 60.2863L254.368 40.0764L238.402 34.3725Z" fill="#00E0B9"/>
+<path id="Polygon 2" d="M239.508 32.5039L250.301 9.30852L254.422 39.3378L239.508 32.5039Z" fill="#00E0B9"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" x="-4.98828" y="69.2166" width="230" height="115" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dx="4" dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.82 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+</defs>
+</svg>

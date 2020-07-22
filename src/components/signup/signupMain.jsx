@@ -4,103 +4,225 @@ import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { signupUser, signupReset } from "../../actions/signupActions";
-import Kite from "../misc/Kite";
-import GirlSit from "../misc/girlSit";
+import GirlSit from "../misc/svgs/girlSit.svg";
+import GirlSitBackgorund from "../misc/svgs/girlSitBackground.svg";
+import PasswordIcon from "../misc/svgs/passwordIcon.svg";
+import EmailIcon from "../misc/svgs/emailIcon.svg";
+import sadIcon from "../misc/svgs/sadIcon.svg";
+import UsernameIcon from "../misc/svgs/usernameIcon.svg";
+//import CloseEyes from "../misc/svgs/closeEyes.svg";
 
 import "../login/loginPage.css";
 import "./signupPage.css";
 
 class SignupMain extends Component {
+  timer = null;
+
   state = {
     formEmail: "",
     formUserName: "",
     formPassword: "",
+    formConfirmPassword: "",
+    userNamePlaceholder: "Username",
+    errorMsg: "",
   };
 
   handleSubmit = async (e) => {
-    e.preventDefault();
-    const { formEmail, formUserName, formPassword } = this.state;
-    let userData = {
-      userName: formUserName,
-      email: formEmail,
-      password: formPassword,
-    };
+    this.setState({ errorMsg: "" });
 
-    //call the signup method
-    this.props.signupUser(userData);
-    //if sucess redirect to the login page
+    const {
+      formEmail: email,
+      formUserName: userName,
+      formPassword: password,
+      formConfirmPassword: confirmPass,
+    } = this.state;
+
+    let errorMsg = "";
+
+    if (!userName) errorMsg = "Username cannot be empty !";
+    else if (!email) errorMsg = "Email cannot be empty !";
+    else if (!password) errorMsg = "Passsword cannot be empty !";
+    else if (password !== confirmPass) errorMsg = "Passswords dont't match !";
+    else {
+      let userData = { userName, email, password };
+      //call the signup method
+      this.props.signupUser(userData);
+      //if sucess redirect to the login page
+    }
+
+    //set clear remove
+    this.setState({ errorMsg });
+    // clear previous timeout and set newone
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.setState({ errorMsg: "" });
+    }, 5000);
   };
 
   handleFormChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  formatError = (msg) => {
+    if (msg) {
+      if (msg.includes("failed: email")) return "Invalid Email !";
+      else if (msg.includes("failed: userName")) return "Invalid Username !";
+      else if (
+        msg.includes(
+          "duplicate key error collection: Users.users index: userName"
+        )
+      ) {
+        return "That username is taken !";
+      } else if (
+        msg.includes("duplicate key error collection: Users.users index: email")
+      ) {
+        return "That email is already registered !";
+      }
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.setState({ errorMsg: "" });
+      }, 5000);
+    } else {
+      return null;
+    }
+  };
+
+  signupOnEnter = (e) => {
+    if (e.key === "Enter") {
+      this.handleSubmit();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.signupOnEnter);
+  }
+
   componentWillUnmount() {
+    clearTimeout(this.timer);
     //if user signedin only then call this
     if (this.props.signupSucess) this.props.signupReset();
+    document.removeEventListener("keydown", this.signupOnEnter);
   }
 
   render() {
     return (
-      <div className="loginMain">
-        {this.props.signupSucess ? "Confirm your email" : null}
-        <div className="leftBox">
-          {this.props.loading ? <span>loading</span> : null}
-          {this.props.signupSucess ? <span>sucess</span> : null}
-          <div className="logoPic">
-            <Kite />
-          </div>
-          <span className="logoName">kite Chat</span>
-          <span className="logoTag">stay connected</span>
-        </div>
-        <div className=" splUserName inputFld">
-          <br />
-          <input
-            type="text"
-            id="userName"
-            name="formUserName"
-            onChange={this.handleFormChange}
-          />
-          <label htmlFor="userName">Pick a Username</label>
-        </div>
-        <div className="girlSit">
-          <GirlSit></GirlSit>
-        </div>
+      <div className="dark1-container loginSignupMain signupMain">
+        <div
+          className="splInput"
+          style={{ backgroundImage: `url(${GirlSitBackgorund})` }}
+        >
+          <img src={GirlSit} id="girlSit" alt="GirlChat Vector" />
+          <div className="inputAndTextWrapper">
+            <div className="inputContainer">
+              <img
+                src={UsernameIcon}
+                alt="username"
+                className="inputIcon"
+                id="userNameIcon"
+              />
 
-        <div className="rightBox">
-          <div className="loginBox">
-            <form>
-              <div className="inputFld">
-                <label className="emailSpl" htmlFor="email">
-                  Email
-                </label>
-                <br />
-                <input
-                  type="text"
-                  id="email"
-                  name="formEmail"
-                  onChange={this.handleFormChange}
-                />
-              </div>
-              <div className="inputFld">
-                <label htmlFor="password">Password</label>
-                <br />
-                <input
-                  type="text"
-                  id="password"
-                  name="formPassword"
-                  onChange={this.handleFormChange}
-                />
-              </div>
-            </form>
-            <button className="loginBtn" onClick={this.handleSubmit}>
-              <span>SIGN UP</span>
-            </button>
-
-            <div className="signupUrl">
-              <span>Already have an account?</span>
-              <Link to="/login">Login</Link>
+              <input
+                placeholder={this.state.userNamePlaceholder}
+                autoComplete="new-password"
+                type="text"
+                name="formUserName"
+                value={this.state.formUserName}
+                onChange={this.handleFormChange}
+              />
             </div>
+            <span>PICK A USERNAME</span>
+          </div>
+        </div>
+        <div className="darkGradient-container loginSignupInputBox">
+          {this.props.signupSucess ? (
+            <span className="loginSucessMsg">
+              Signup Sucess, Verify your Email !
+            </span>
+          ) : null}
+          {this.state.errorMsg || this.formatError(this.props.signUpError) ? (
+            <div className="errorMessage">
+              <img src={sadIcon} alt="error" />
+              <span>
+                {this.state.errorMsg ||
+                  this.formatError(this.props.signUpError)}
+              </span>
+            </div>
+          ) : null}
+          <div className="inputContainer onlyMobile">
+            <img
+              src={UsernameIcon}
+              alt="username"
+              className="inputIcon"
+              id="userNameIcon"
+            />
+            <input
+              autoComplete="new-password"
+              type="text"
+              placeholder="Username"
+              name="formUserName"
+              value={this.state.formUserName}
+              onChange={this.handleFormChange}
+            />
+          </div>
+          <div className="inputContainer ">
+            <img
+              src={EmailIcon}
+              alt="email"
+              className="inputIcon"
+              id="userNameIcon"
+            />
+            <input
+              autoComplete="new-password"
+              type="text"
+              placeholder="Email"
+              name="formEmail"
+              value={this.state.formEmail}
+              onChange={this.handleFormChange}
+            />
+          </div>
+          <div className="inputContainer ">
+            <img
+              src={PasswordIcon}
+              alt="password"
+              className="inputIcon"
+              id="passwordIcon"
+            />
+            <input
+              autoComplete="new-password"
+              type="password"
+              placeholder="Password"
+              name="formPassword"
+              value={this.state.formPassword}
+              onChange={this.handleFormChange}
+            />
+          </div>
+
+          <div className="inputContainer">
+            <img
+              src={PasswordIcon}
+              alt="ConrirmPassword"
+              className="inputIcon"
+              id="passwordIcon"
+            />
+            <input
+              autoComplete="new-password"
+              type="password"
+              placeholder="Confirm Password"
+              name="formConfirmPassword"
+              value={this.state.formConfirmPassword}
+              onChange={this.handleFormChange}
+            />
+          </div>
+
+          <div className="callAction btn" onClick={this.handleSubmit}>
+            <span>SIGNUP</span>
+          </div>
+
+          <div className="redirect-container">
+            <span>Already have an account?</span>
+            <Link to="/login" className="redirectUrl">
+              Login
+            </Link>
           </div>
         </div>
       </div>
@@ -115,6 +237,7 @@ SignupMain.propTypes = {
 
 const mapStateToProps = (state) => ({
   loading: state.signupData.loading,
+  signUpError: state.signupData.error,
   signupSucess: state.signupData.signupSucess,
   signedupUserName: state.signupData.userName,
 });

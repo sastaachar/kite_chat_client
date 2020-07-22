@@ -1,30 +1,69 @@
-/* biggest hack ever */
-
-.emailSpl {
-  left: -6.51vw;
+@media only screen and (max-width: 768px) {
+  .splInput {
+    display: none;
+  }
+  .callAction {
+    margin-bottom: 20px;
+  }
 }
 
-.splUserName input {
+/* for desktop */
+
+@media only screen and (min-width: 769px) {
+  .onlyMobile {
+    display: none;
+  }
+}
+
+.signupMain .inputContainer {
+  position: relative;
+  margin-bottom: 23px;
+}
+
+.splInput {
   position: absolute;
-  border: 1px solid black;
-  top: 49vh;
-  right: 50vw;
-  width: 25vw;
-}
-.splUserName label {
-  position: absolute;
-  width: 25vw;
-  top: 50vh;
-  right: 45vw;
-  /* i dont know y :( */
+  left: 7%;
+  width: 30vw;
+  height: 18vw;
+  min-width: 200px;
+  background-size: cover;
 }
 
-.girlSit {
+.splInput .inputAndTextWrapper {
   position: absolute;
-  height: 20.08vh;
-  width: 20.08vh;
-  top: 30.4vh;
-  right: 68vw;
+  width: 60%;
+  top: 47%;
+  left: 20%;
+  text-align: center;
+}
+.inputAndTextWrapper .inputContainer {
+  margin-bottom: 4px;
 }
 
-/*  */
+#girlSit {
+  position: absolute;
+  left: 22%;
+  top: 18%;
+  z-index: 2;
+  width: 15%;
+}
+
+.splInput span {
+  color: white;
+  letter-spacing: 1.2px;
+  font-size: 1.2em;
+}
+
+.changing-placeholder {
+  position: absolute;
+  left: 41px;
+  bottom: 1px;
+  letter-spacing: 3px;
+  font-size: 1.1em;
+  z-index: 1;
+}
+
+.loginSucessMsg {
+  position: absolute;
+  color: var(--light);
+}

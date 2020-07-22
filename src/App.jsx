@@ -18,7 +18,9 @@ import AuthenticatedRoute from "./components/misc/authenticatedRoute";
 import LoadingPage from "./components/misc/loadingPage";
 import PreCheckRoute from "./components/misc/preCheckRoute";
 import AccountVerification from "./components/misc/accountVerification";
-
+import Circle1 from "./components/misc/svgs/circle1.svg";
+import Circle2 from "./components/misc/svgs/circle2.svg";
+import Kite from "./components/misc/svgs/kite.svg";
 import store from "./store";
 
 import "./App.css";
@@ -47,29 +49,6 @@ class App extends Component {
             <PreCheckRoute exact path="/">
               <LoadingPage />
             </PreCheckRoute>
-            {
-              //if user tries to go to these paths after being loggedIn
-              //but technically not possible cause the page will reload
-              //the main page is suppposed to be in / route but the page sucks for now
-              //so we are going with login page
-            }
-
-            <UnauthenticatedRoute path="/login">
-              <LoginMain />
-            </UnauthenticatedRoute>
-            <UnauthenticatedRoute path="/signup">
-              <SignupMain />
-            </UnauthenticatedRoute>
-
-            {/* these two paths i.e verification and reset_password
-                  are speacial paths and can be accessed with restrictions
-              */}
-            <Route path="/account/verification/:token">
-              <AccountVerification />
-            </Route>
-            <Route path="/account/reset_password/:token">
-              <span>password reset</span>
-            </Route>
 
             {
               //only show if logged in
@@ -77,6 +56,44 @@ class App extends Component {
             <AuthenticatedRoute path="/chat">
               <ChatMain />
             </AuthenticatedRoute>
+
+            {
+              //if user tries to go to these paths after being loggedIn
+              //but technically not possible cause the page will reload
+              //the main page is suppposed to be in / route but the page sucks for now
+              //so we are going with login page
+              //added the fragment below ,cause otherwise div will be passed with  noncomputerd argument
+              //and give warnings
+            }
+
+            <React.Fragment>
+              <div className="dark-container">
+                <div className="logoAndName">
+                  <span className="kite-name">kite Chat</span>
+                  <span className="kite-moto">stay connected....</span>
+                  <img src={Kite} className="logo" alt="circleVector1" />
+                </div>
+
+                <img src={Circle1} className="circle1" alt="circleVector1" />
+                <img src={Circle2} className="circle2" alt="circleVector2" />
+                <UnauthenticatedRoute path="/login">
+                  <LoginMain />
+                </UnauthenticatedRoute>
+                <UnauthenticatedRoute path="/signup">
+                  <SignupMain />
+                </UnauthenticatedRoute>
+                {/* these two paths i.e verification and reset_password
+                  are speacial paths and can be accessed with restrictions
+              */}
+                <Route path="/account/verification/:token">
+                  <AccountVerification />
+                </Route>
+                <Route path="/account/reset_password/:token">
+                  <span>password reset</span>
+                </Route>
+              </div>
+            </React.Fragment>
+
             {
               //if oversmart user tries anything
             }

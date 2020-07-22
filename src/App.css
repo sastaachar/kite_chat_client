@@ -1,23 +1,126 @@
 :root {
-    --light: #00e0b9;
-    --dark: #22215b;
-    --darker: #19183F;
-    --light-dark: #b563ff;
-    --smooth-red: #FF4654;
+  --light: #00e0b9;
+  --light-shadow: rgba(0, 224, 185, 0.25);
+  --dark: #19183f;
+  --dark-2: #22215b;
+  --dark-3: #161457;
+  --highlight: #faff0a;
+  --red: #ff4654;
 }
 
 div::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: var(--dark);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--dark);
 }
 
 div::-webkit-scrollbar {
-    width: 5px;
-    background-color: #f5f5f5;
+  width: 5px;
+  background-color: #f5f5f5;
 }
 
 div::-webkit-scrollbar-thumb {
-    background-color: #000000;
-    border: 2px solid var(--light);
+  background-color: #000000;
+  border: 2px solid var(--light);
 }
+
+@media only screen and (max-width: 768px) {
+  .logoAndName {
+    font-size: 5vw !important;
+  }
+}
+
+/* for desktop */
+
+@media only screen and (min-width: 769px) {
+}
+
+.dark-container {
+  /* background-image: url("../src/components/misc/svgs/newloginPagedemo.png"); */
+  background-color: var(--dark);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* vectors for background */
+
+.circle1,
+.circle2 {
+  position: absolute;
+  z-index: 0;
+}
+
+.circle1 {
+  bottom: 0px;
+  left: 0px;
+  width: 21.7vw;
+}
+
+.circle2 {
+  right: 0px;
+  top: 6px;
+  height: 66.5vh;
+}
+
+/* --- vectors for background --- */
+
+/* logo and name */
+
+.logoAndName {
+  position: absolute;
+  color: white;
+  top: 0px;
+  left: 0px;
+  font-size: 2.5vw;
+  z-index: 2;
+}
+
+.kite-name {
+  position: relative;
+  top: 0.9em;
+  left: 1.2em;
+  text-shadow: 2px 2px 2px rgba(0, 224, 185, 0.25);
+}
+
+.kite-moto {
+  position: relative;
+  display: block;
+  font-size: 0.34em;
+  top: 2em;
+  left: 3.6em;
+}
+
+.logo {
+  top: 0.4em;
+  width: 7.5em;
+  position: absolute;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+/* --- logo and name --- */
+
+.dark1-container {
+  background-color: var(--dark-2);
+  position: relative;
+  /* may need change for responsive */
+  width: 68.35vw;
+  height: 70.49vh;
+  border-radius: 20px;
+  z-index: 1;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.47);
+}
+
+.darkGradient-container {
+  background: linear-gradient(61.06deg, #19183f 1.44%, #161457 98.47%);
+  box-shadow: -4px -4px 10px rgba(0, 224, 185, 0.22),
+    6px 6px 10px rgba(0, 0, 0, 0.51);
+  border-radius: 13px;
+}
+
+/* reset and verification */

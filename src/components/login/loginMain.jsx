@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { loginUser } from "../../actions/loginActions";
-import TheGirl from "../misc/TheGirl";
-import TheGuy from "../misc/TheGuy";
-import Kite from "../misc/Kite";
+import TheGirl from "../misc/svgs/TheGirlChat.svg";
+import UsernameIcon from "../misc/svgs/usernameIcon.svg";
+import PasswordIcon from "../misc/svgs/passwordIcon.svg";
+import sadIcon from "../misc/svgs/sadIcon.svg";
 
 import "./loginPage.css";
 
 class LoginMain extends Component {
+  timer = null;
+
   state = {
     formEmail: "",
     formUserName: "",
@@ -23,63 +26,94 @@ class LoginMain extends Component {
     if (this.state.email) userData.email = this.state.formEmail;
     else userData.userName = this.state.formUserName;
     this.props.loginUser(userData);
+
+    //clear and set new
+    clearTimeout(this.timer);
+    setTimeout(() => {
+      this.setState({ errorMsg: "" });
+    }, 10000);
   };
   handleFormChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  render() {
-    return (
-      <div className="loginMain">
-        <div className="leftBox">
-          {this.props.loading ? <span>loading</span> : null}
-          <div className="logoPic">
-            <Kite></Kite>
-          </div>
-          <span className="logoName">kite Chat</span>
-          <span className="logoTag">stay connected</span>
+  formatError = (msg) => {
+    if (msg == "Auth Error") return "Incorrect username or password !";
+    else if ((msg = "notVerified!")) return "Please verify your Email !";
+    return null;
+  };
 
-          <div className="girlPic">
-            <TheGirl></TheGirl>
-          </div>
-        </div>
-        <div className="rightBox">
-          <div className="guyChat">
-            <TheGuy></TheGuy>
-          </div>
-          <div className="loginBox">
-            <form>
-              <div className="inputFld">
-                <label htmlFor="userName">Username</label>
-                <br />
-                <input
-                  type="text"
-                  id="userName"
-                  name="formUserName"
-                  onChange={this.handleFormChange}
-                />
-              </div>
-              <div className="inputFld">
-                <label htmlFor="password">Password</label>
-                <br />
-                <input
-                  type="password"
-                  id="password"
-                  name="formPassword"
-                  onChange={this.handleFormChange}
-                />
-              </div>
-            </form>
-            <button className="loginBtn" onClick={this.handleLogin}>
-              <span>LOGIN</span>
-            </button>
-            <div className="forgotUrl">
-              <Link to="/password/reset">Forgot password?</Link>
+  loginOnEnter = (e) => {
+    if (e.key === "Enter") {
+      this.handleLogin();
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.loginOnEnter);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+    document.removeEventListener("keydown", this.loginOnEnter);
+  }
+
+  render() {
+    const errorMsg = this.formatError(this.props.errorMsg);
+    return (
+      <div className="dark1-container loginSignupMain">
+        <img src={TheGirl} className="girlVector" alt="GirlChat Vector" />
+        <div className="darkGradient-container loginSignupInputBox">
+          {errorMsg ? (
+            <div className="errorMessage">
+              <img src={sadIcon} alt="error" />
+              <span>{errorMsg}</span>
             </div>
-            <div className="signupUrl">
-              <span>Don't have an account?</span>
-              <Link to="/signup">Signup</Link>
-            </div>
+          ) : null}
+
+          <div className="inputContainer ">
+            <img
+              src={UsernameIcon}
+              alt="username"
+              className="inputIcon"
+              id="userNameIcon"
+            />
+            <input
+              type="text"
+              placeholder="Username"
+              name="formUserName"
+              value={this.state.formUserName}
+              onChange={this.handleFormChange}
+            />
+          </div>
+          <div className="inputContainer ">
+            <img
+              src={PasswordIcon}
+              alt="password"
+              className="inputIcon"
+              id="passwordIcon"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="formPassword"
+              value={this.state.formPassword}
+              onChange={this.handleFormChange}
+            />
+          </div>
+          <div className="callAction btn" onClick={this.handleLogin}>
+            <span>LOGIN</span>
+          </div>
+          <div>
+            <Link to="/password/reset" className="redirectUrl">
+              Forgot password?
+            </Link>
+          </div>
+          <div className="redirect-container">
+            <span>Don't have an account?</span>
+            <Link to="/signup" className="redirectUrl">
+              Signup
+            </Link>
           </div>
         </div>
       </div>
@@ -94,6 +128,7 @@ LoginMain.propTypes = {
 
 const mapStateToProps = (state) => ({
   loading: state.loginData.loading,
+  errorMsg: state.loginData.error,
 });
 
 export default connect(mapStateToProps, { loginUser })(LoginMain);
