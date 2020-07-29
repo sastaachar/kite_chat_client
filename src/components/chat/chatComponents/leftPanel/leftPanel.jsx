@@ -46,6 +46,7 @@ class LeftPanel extends Component {
     return (
       <div className="chatLeftPanel">
         <UserInfo />
+
         <FriendOptions setListType={this.setListType} />
         <div className="friendsList">
           {allFriends.map((friend) => {

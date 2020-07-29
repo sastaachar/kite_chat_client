@@ -27,6 +27,17 @@ const RightPanel = (props) => {
             }}
           />
           <span className="userName-big">{user.userName}</span>
+
+          <div className="textInfo">
+            <p>
+              <span className="highLight">Status : </span>
+              <span>{user.smallInfo}</span>
+            </p>
+            <p>
+              <span className="highLight">About me : </span>
+              <span>{user.largeInfo}</span>
+            </p>
+          </div>
         </div>
       ) : (
         <span>Select a user to Chat</span>

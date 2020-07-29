@@ -1,6 +1,20 @@
 .chatMain {
   width: 100vw;
   height: 100vh;
+  background-color: var(--dark);
   display: flex;
   flex-direction: row;
+  padding: 25px 25px;
+  box-sizing: border-box;
+}
+
+.profilePic {
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background-size: cover;
+  border: 3px solid var(--light);
+}
+.profilePic:hover {
+  border: 3px solid #faff0a;
 }

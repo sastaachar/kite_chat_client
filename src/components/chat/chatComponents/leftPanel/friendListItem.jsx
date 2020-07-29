@@ -20,14 +20,8 @@ import ContextMenu from "../contextMenu/contextMenu";
 //*note (A,I) - active and inactive
 
 const FriendListItem = (props) => {
-  const {
-    friend,
-    type,
-    respondRequest,
-    self_userName,
-    socket,
-    removeFriend,
-  } = props;
+  const { friend, respondRequest, self_userName, socket, removeFriend } = props;
+  let { type } = props;
 
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
@@ -37,6 +31,9 @@ const FriendListItem = (props) => {
     setPos({ x: event.clientX, y: event.clientY });
     setVisible(true);
   };
+
+  // this is dont avoid case fall-through
+  if (type === "InActiveRequest") type = "ActiveRequest";
 
   //imediately invoked function
   return (() => {
@@ -90,9 +87,8 @@ const FriendListItem = (props) => {
             />
           </div>
         );
-      //this is a fallthrough cause for now i dont need the InActiveReq format
+      //this is will also handle InActiveRequest cause for now i dont need the InActiveReq format
       //offline friend request
-      case "InActiveRequest":
       //online request
       case "ActiveRequest":
         return (

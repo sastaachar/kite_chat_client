@@ -4,7 +4,11 @@
   flex-direction: column-reverse;
   height: 100%;
   width: 49.93vw;
-  background-color: #22215b;
+  background: var(--dark-gradient);
+  border-radius: var(--chatRadius);
+  box-shadow: var(--chatShadow);
+  box-sizing: border-box;
+
   color: #fff;
 }
 
@@ -14,7 +18,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 100%;
-  background-color: #151433;
+  border-top: 2px solid var(--light);
   height: fit-content;
 }
 .chatInputContainer {

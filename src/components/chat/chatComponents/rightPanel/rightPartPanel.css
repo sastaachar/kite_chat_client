@@ -1,36 +1,74 @@
 .chatRightPanel {
-  height: 100vh;
-  width: 25.4vw;
-  background-color: #19183f;
+  margin-left: 21px;
+  width: 20vw;
+  position: relative;
 }
 
 .logoutBox {
-  position: relative;
-  height: 53px;
-  border-bottom: 2px solid var(--light);
+  margin-left: auto;
+  margin-right: 0;
+  border-radius: var(--chatRadius);
+  width: fit-content;
+  box-shadow: var(--chatShadow);
+  padding: 10px 30px;
 }
 .logoutBox span {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  letter-spacing: 2px;
   font-size: 20px;
   color: var(--light);
-  text-decoration: none;
-}
-.logoutBox span:hover {
   cursor: pointer;
 }
 
 .firendInfoBIg {
+  text-align: center;
+  overflow-y: auto;
+  height: 63vh;
+  margin-top: 15%;
+  border-radius: var(--chatRadius);
+  box-shadow: var(--chatShadow);
+}
+
+.highLight {
+  color: var(--highlight);
+}
+
+.textInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 2px solid var(--light);
-  padding-bottom: 10px;
+  justify-content: space-evenly;
+  text-align: center;
+  border-top: 2px solid var(--light);
+  color: white;
 }
+
 .picBig {
-  margin: 20px;
-  width: 170px;
-  height: 170px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 140px;
+  height: 140px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .picBig {
+    min-width: 30px;
+    min-height: 30px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
 }

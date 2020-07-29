@@ -6,24 +6,32 @@
   --dark-3: #161457;
   --highlight: #faff0a;
   --red: #ff4654;
+  --chatRadius: 25px;
+  --dark-gradient: linear-gradient(61.06deg, #19183f 1.44%, #161457 98.47%);
+  --chatShadow: 6px 6px 9px rgba(0, 0, 0, 0.51),
+    -4px -4px 10px rgba(90, 90, 90, 0.33);
 }
 
 div::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: var(--dark);
 }
-
 div::-webkit-scrollbar {
-  width: 5px;
+  border-radius: 5px;
+  width: 4px;
   background-color: #f5f5f5;
 }
 
 div::-webkit-scrollbar-thumb {
-  background-color: #000000;
-  border: 2px solid var(--light);
+  width: 10px;
+  border-radius: 5px;
+  background-clip: padding-box;
+  background: var(--light);
 }
 
+div {
+  scrollbar-color: var(--light) var(--dark) !important;
+  scrollbar-width: thin !important;
+}
 @media only screen and (max-width: 768px) {
   .logoAndName {
     font-size: 5vw !important;
@@ -117,7 +125,7 @@ div::-webkit-scrollbar-thumb {
 }
 
 .darkGradient-container {
-  background: linear-gradient(61.06deg, #19183f 1.44%, #161457 98.47%);
+  background: var(--dark-gradient);
   box-shadow: -4px -4px 10px rgba(0, 224, 185, 0.22),
     6px 6px 10px rgba(0, 0, 0, 0.51);
   border-radius: 13px;

@@ -1,38 +1,38 @@
 .contextMenu {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    background-color: var(--darker);
-    height: 100px;
-    width: 100px;
-    border-radius: 13px;
-    box-shadow: -2px -2px 9px rgba(90, 90, 90, 10), 6px 6px 9px rgba(0, 0, 0, 100);
-    z-index: 1;
-    transform-origin: top left;
-    animation: popUp 0.1s ease-in;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--dark-3);
+  height: 100px;
+  width: 100px;
+  border-radius: 13px;
+  box-shadow: var(--chatShadow);
+  z-index: 1;
+  transform-origin: top left;
+  animation: popUp 0.1s ease-in;
 }
 
 .contextMenu span {
-    padding: 2px;
-    display: block;
-    margin: 3px 0px;
-    color: var(--light);
-    letter-spacing: 3px;
+  padding: 2px;
+  display: block;
+  margin: 3px 0px;
+  color: var(--light);
+  letter-spacing: 3px;
 }
 
 .contextMenu span:hover {
-    color: var(--smooth-red);
-    transform: translateY(-2px);
-    cursor: pointer;
+  color: var(--red);
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 @keyframes popUp {
-    from {
-        transform: scale(0.1);
-    }
-    to {
-        transform: scale(1);
-    }
+  from {
+    transform: scale(0.1);
+  }
+  to {
+    transform: scale(1);
+  }
 }
