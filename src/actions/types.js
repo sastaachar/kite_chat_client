@@ -80,12 +80,12 @@ export const USERDATA_UPDATE_FAIL = "USERDATA_UPDATE_FAIL";
 export const SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:5000"
-    : "https://kite-chat-server.herokuapp.com";
+    : "kitechatserver-production.up.railway.app";
 export const CLIENT_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://kite-chat.herokuapp.com";
+    : "https://kitechat.netlify.app";
 export const CHAT_SERVER_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2500"
-    : "https://kite-chat-chatserver.herokuapp.com";
+    : "kitechatchatserver-production.up.railway.app";
